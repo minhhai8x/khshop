@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bn_speed: 1
+  bn_pause: 1
+  bn_width: 1
+  bn_random: 1
+  bn_max_large: 1
+  bn_max_small: 1
+
+two:
+  bn_speed: 1
+  bn_pause: 1
+  bn_width: 1
+  bn_random: 1
+  bn_max_large: 1
+  bn_max_small: 1

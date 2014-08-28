@@ -1,0 +1,117 @@
+<div id="right"> 
+<div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Thêm Coupon mới</h5>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for(@admin_coupon) do |f| %>
+  <!-- box / messages -->
+ <% if @admin_coupon.errors.any? %>
+  <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		<div class="messages">
+			<div class="message message-error" id="message-error">
+				<div class="image">
+					<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+				</div>
+				<div class="text">
+					<h6>Có <%= pluralize(@admin_coupon.errors.count, "lỗi") %> xảy ra !</h6>
+					<% @admin_coupon.errors.full_messages.each do |message| %>
+				        <span><%= message %></span>
+				    <% end %>
+				</div>
+				<div class="dismiss">
+					<a href="#message-error"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%end%>
+  <!-- end box / messages -->
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tên Coupon:</label></div>
+  <div class="input"><%= f.text_field :name, :class=>"medium" %></div>
+</div>
+
+
+<div class="field">
+  <div class="label"><label for="input-small">Mã CODE:</label></div>
+  <div class="input"><%= f.text_field :code, :class=>"small" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Loại:</label></div>
+  <div class="select">
+    <%= f.select( :discount_type, options_for_select([["Phần trăm (%)",0],["Giá cố định",1]], :selected=>f.object.discount_type))%>                
+  </div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Giảm giá:</label></div>
+  <div class="input"><%= f.text_field :discount, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Ngày bắt đầu:</label></div>
+  <div class="input">
+  	 <%= f.text_field :start_date, :class=>"date" %>
+  	<img class="ui-datepicker-trigger" src="<%=asset_path('index/calendar.png')%>" >
+  </div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Ngày kết thúc:</label></div>
+  <div class="input">
+  	<%= f.text_field :end_date, :class=>"date" %>
+  	<img class="ui-datepicker-trigger  date" src="<%=asset_path('index/calendar.png')%>" >
+  </div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Khách hàng đăng nhập:</label></div>
+  <div class="select">
+    <%= f.select( :is_login, options_for_select([["Không cần",0],["Cần",1]], :selected=>f.object.is_login))%>                
+  </div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Miễn phí vận chuyển:</label></div>
+  <div class="select">
+    <%= f.select( :is_free_ship, options_for_select([["Không",0],["Có",1]], :selected=>f.object.is_free_ship))%>                
+  </div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Áp dụng cho sản phẩm:</label></div>
+  <div class="input"><%= f.text_field :apply_products, :class=>"small" %>&nbsp;<i>[Nhập mã sản phẩm cụ thể để áp dụng giảm giá, mỗi sản phẩm cách nhau bằng dấu &nbsp;&nbsp;&nbsp;phẩy. Hoặc để trống sẽ áp dụng cho toàn bộ giỏ hàng.]</i></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Áp dụng cho thể loại:</label></div>
+  <div class="input"><%= f.text_field :apply_catalogues, :class=>"small" %>&nbsp;<i>[Nhập mã thể loại cần áp dụng.]</i></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Số lần tối đa cho<br /> bất kỳ khách hàng:</label></div>
+  <div class="input"><%= f.text_field :max_times, :class=>"small" %>&nbsp;<i>[Số lần tối đa áp dụng giảm giá cho bất kỳ khách hàng nào. Để trống sẽ là không giới hạn.]</i></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Số lần tối đa cho<br /> một khách hàng:</label></div>
+  <div class="input"><%= f.text_field :max_times_cus, :class=>"small" %>&nbsp;<i>[Số lần tối đa áp dụng giảm giá cho một khách hàng cụ thể. Để trống sẽ là không giới hạn.]</i></div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Tình trạng:</label></div>
+  <div class="select">
+    <%= f.select( :status, options_for_select([["Chưa kích hoạt",0],["Đã kích hoạt",1]], :selected=>f.object.status))%>                
+  </div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+
+<%end%>
+
+</div>
+</div>

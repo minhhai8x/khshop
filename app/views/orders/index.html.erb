@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>KH Shop</title>
+<meta name="generator" content="haiwebcc"/>
+<meta name="robots" content="index,follow"/>
+<meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<%= stylesheet_link_tag    'sanpham', media: 'all', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+</head>
+<body id="order" class="order hide-left-column hide-right-column lang_en">
+<div id="page">
+  <div class="main-wrap-center">
+<div class="main-wrap">
+  <%= render 'sanpham/header' %>
+  <div class="columns-container">
+<div class="container" id="columns">
+
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+<a title="Trang chủ" href="<%= root_path%>" class="home"><i class="icon-home"></i></a>
+<span class="navigation-pipe">&gt;</span>
+<span class="navigation_page">Giỏ hàng của bạn</span>
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+<div class="center_column col-xs-12 col-sm-12" id="top_column"></div>
+</div>
+<div class="row">
+<div class="center_column col-xs-12 col-sm-12" id="center_column">
+
+
+<h1 class="page-heading" id="cart_title">Thông tin giỏ hàng
+<span class="heading-counter">Giỏ hàng của bạn :
+<span id="summary_products_quantity"><%= cart_qty%></span>
+</span>
+</h1>
+<% if cart_qty > 0%>
+<!-- Steps -->
+<ul id="order_step" class="step clearfix">
+<li class="step_current  first">
+<span><em>01.</em> Giỏ hàng</span>
+</li>
+<li class="step_todo second">
+<span><em>02.</em> Thông tin khách hàng</span>
+</li>
+<li class="step_todo third">
+<span><em>03.</em>Thanh toán</span>
+</li>
+</ul>
+<!-- /Steps -->
+<!-- link_to "Checkout", @cart.paypal_url(sanpham_path+"/detail/"+pnew.id.to_s) -->
+<div class="table_block table-responsive" id="order-detail-content">
+<table class="table table-bordered" id="cart_summary">
+<thead>
+<tr>
+<th class="cart_product first_item">Hình ảnh</th>
+<th class="cart_description item">Tên sản phẩm</th>
+<th class="cart_unit item">Đơn giá</th>
+<th class="cart_quantity item">Số lượng</th>
+<th class="cart_total item">Thành tiền</th>
+<th class="cart_delete last_item">&nbsp;</th>
+</tr>
+</thead>
+<tfoot>
+<% if @cpflg ==1%>	
+<tr class="cart_total_price" id="cpdiscount" >
+<td class="total_price_container text-right" colspan="3"><span>Giảm giá</span></td>
+<td id="total_price_container" class="price" colspan="2"><span id="total_price"><%= session[:cp_discount]%> %</span></td>
+</tr>
+<%end%>
+<tr class="cart_total_price">
+<td class="total_price_container text-right" colspan="3"><span>Tổng cộng</span></td>
+<td id="total_price_container" class="price" colspan="2"><span id="total_price"><%= number_to_currency(@product_sum)%></span></td>
+</tr>
+<tr class="cart_item last_item first_item address_0 odd" >
+<td class="cart_product">
+<input type="text" value="" name="txtCode" id="txtCode" class="form-control">
+</td>
+<td>
+<p class="submit">
+<button type="button" id="btnCheckCoupon" name="btnCheckCoupon" class="button btn btn-default button-medium">
+	<span><i class="icon-lock left" style="content:"\f06b"></i>Check mã giảm giá (nếu có)</span>
+</button>&nbsp;&nbsp;&nbsp;<img id="imgloading4" style="display: none;" src="<%=asset_path('index/zoomloader.gif')%>" />
+</p>
+</td>
+</tfoot>
+<tbody>
+<% @product_ids.sort.uniq.each do |v| %>																				
+<tr class="cart_item last_item first_item address_0 odd" >
+<td class="cart_product">
+<a href="<%= sanpham_path%>/detail/<%= v%>"><img  height="98" alt="" src="<%= get_product_info(v).image %>"></a>
+</td>
+<td class="cart_description"><p class="product-name"><a href="<%= sanpham_path%>/detail/<%= v%>"><%= get_product_info(v).name %></a></p></td>
+<td  class="cart_unit"><span class="price"><span class="price"><%= number_to_currency(get_product_info(v).price) %></span></span></td>
+<td class="cart_quantity text-center">
+<div class="cart_quantity_button clearfix">
+<input onchange="cart_change(<%= v%>,this.value)" type="text" id="qty_<%=v%>"  name="qty_<%=v%>" value="<%= @product_ids.count(v)%>" class="cart_quantity_input form-control grey" autocomplete="off" size="2">
+<div class="cart_quantity_button clearfix">
+<a onclick="cart_change_down(this.getAttribute('data-field-qty'),<%= v%>)" class="btn btn-default button-minus product_quantity_down" data-field-qty="qty_<%= v%>" href="#">
+<span><i class="icon-minus"></i></span>
+</a>
+<a onclick="cart_change_up(this.getAttribute('data-field-qty'),<%= v%>)"  class="btn btn-default button-plus product_quantity_up " data-field-qty="qty_<%= v%>" href="#">
+<span><i class="icon-plus"></i></span>
+</a>
+</div>
+</div>
+</td>
+<td class="cart_total">
+	<% if check_discount(v)%>
+	<span class="price"><%=number_to_currency((get_product_info(v).price*@product_ids.count(v))*(1- (session[:cp_discount].to_f/100)))%></span>
+	<span style="text-decoration: line-through;" class="price"><%=number_to_currency(get_product_info(v).price*@product_ids.count(v))%></span>
+	<%else%>
+	<span class="price"><%=number_to_currency(get_product_info(v).price*@product_ids.count(v))%></span>
+	<%end%>
+</td>
+<td class="cart_delete text-center">
+<div>
+<a onclick="del_product(<%= v%>)"  id="del_<%= v%>" class="cart_quantity_delete" title="Xóa" style="cursor: pointer;" ><i class="icon-trash"></i></a>
+</div>
+</td>
+</tr>
+<%end%>
+</tbody>
+</table>
+</div> <!-- end order-detail-content -->
+<% if session[:customer].nil?%>
+<div class="row">
+	<!--------Login--------->
+<div class="col-xs-12 col-sm-6">
+	<div class="box" id="login_form">
+		<h3 class="page-subheading">Bạn đã có tài khoản chưa ?</h3>
+		<div class="form_content clearfix">
+			<div class="form-group"><label for="email">Email</label>
+			<input type="text" class="is_required validate account_input form-control" id="logemail" name="email" value="">
+			</div>
+			<div class="form-group"><label for="passwd">Password</label>
+				<span><input type="password" class="is_required validate account_input form-control" id="logpasswd" name="passwd" value=""></span>
+			</div>
+			
+			<p class="submit">
+				<button onclick="login();" type="button" id="btnoLogin" name="btnoLogin" class="button btn btn-default button-medium">
+					<span><i class="icon-lock left"></i>Đăng nhập</span>
+				</button>&nbsp;&nbsp;&nbsp;<img src="/assets/index/zoomloader.gif" style="display: none;" id="imgloading2">
+			</p>
+		</div>
+	</div>
+</div>
+<!------//--Login------->
+<!--------Sign_up------->
+<div class="col-xs-12 col-sm-6 colsm6registersuccess"  style="display:none">
+	<div id="create_account_error" class="alert alert-success"></div>
+</div>
+<div class="col-xs-12 col-sm-6 colsm6register">
+<div id="create-account_form" class="box">
+	<h3 class="page-subheading">Tạo mới tài khoản ?</h3>
+	<div class="form_content clearfix">
+		<p>Bạn chỉ cần nhập Email sau đó chúng tôi sẽ tạo tài khoản cho bạn</p>
+		
+		
+		<div class="form-group">
+			<label for="email_create">Địa chỉ Email</label>
+			<input type="text" value="" name="txtEmail" id="txtEmail" class="is_required validate account_input form-control">
+		</div>
+		<div class="submit">
+			<button onclick="acc_email();" name="btnCreate" id="btnCreate" type="button" class="btn btn-default button button-medium exclusive">
+				<span><i class="icon-user left"></i>Tạo tài khoản</span>
+			</button>&nbsp;&nbsp;&nbsp;<img id="imgloading" style="display: none;" src="<%=asset_path('index/zoomloader.gif')%>" />
+		</div>
+	</div>
+</div>
+</div>
+
+<!------//--Sign_up----->
+</div>
+<%end%>
+<h3 class="page-subheading">Bạn có thể thanh toán bằng cách nhập thông tin vào ô bên dưới</h3>
+<!-----Customer Information------>
+<%= form_for @order, html: {class: "box"} do |f| %>
+<div class="row">
+<div class="col-xs-12 col-sm-6">
+
+<h3 class="page-subheading">Thông tin khách hàng</h3>
+<div class="form_content clearfix">
+<p>Vui lòng nhập đầy đủ thông tin vào ô bên dưới :</p>
+<p>( Nếu là thành viên của KHShop, vui lòng bỏ qua bước này )</p>
+<div style="display: none;" id="create_account_error" class="alert alert-danger">Vui lòng nhập email</div>
+<div class="form-group"><label for="email_create">Tên khách hàng</label>
+<%= f.text_field :cs_name,:class=>"form-control" %>
+</div>
+<div class="form-group"><label for="email_create">Địa chỉ</label>
+<%= f.text_field :cs_address,:class=>"form-control" %>
+</div>
+<div class="form-group"><label for="email_create">Điện thoại</label>
+<%= f.text_field :cs_phone,:class=>"form-control" %>
+</div>
+<div class="form-group"><label for="email_create">Email</label>
+<%= f.text_field :cs_email,:class=>"form-control" %>
+</div>
+<div class="form-group"><label for="email_create">Ghi chú</label>
+<%= f.text_area :cs_note,:class=>"form-control"%>
+</div>
+</div>
+
+</div>
+
+</div>
+<!---end---Customer Information------------>
+<input type="hidden" id="order_cs_sum" name="order[cs_sum]" value="<%= @product_sum%>" />
+<p class="cart_navigation clearfix">
+<%= button_tag(type: 'submit', class: "button btn btn-default standard-checkout button-medium") do %>
+ <span>Thanh toán</span>
+<% end %>
+<!--input type="checkbox" name="chkPaypal" id="chkPaypal" class="standard-checkout" /-->
+<%= button_tag(type: 'submit', class: "standard-checkout paypal_checkout") do %>
+
+<% end %>
+
+<input type="hidden" id="order_pay_kind" name="order[pay_kind]" value="0" />
+<input type="hidden" id="order_url" name="order[url]" value="<%= paypal_url(orders_path)%>" />
+<a title="Tiếp tục mua hàng" class="button-exclusive btn btn-default" href="<%= root_path%>">
+<i class="icon-chevron-left"></i>Tiếp tục mua hàng
+</a>
+</p>
+<%end%>
+
+<%else%>
+<p class="alert alert-warning" id="emptyCartWarning" >Giỏ hàng của bạn rỗng.</p>
+<p class="cart_navigation clearfix">
+<a title="Trở về trang chủ" class="button-exclusive btn btn-default" href="<%= root_path%>">
+<i class="icon-chevron-left"></i>Trở về trang chủ
+</a>
+</p>
+<%end%>
+</div><!-- #center_column -->
+</div><!-- .row -->
+</div>
+  </div>
+  <%= render 'sanpham/footer' %>
+</div>
+  </div>
+</div>
+<script type="text/javascript">
+var CUSTOMIZE_TEXTFIELD = 1;
+var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';
+var FancyboxboxI18nClose = 'Close';
+var contentOnly = false;
+var static_token = '';
+var baseDir = '';
+var baseUri = '';
+var blocksearch_type = 'top';
+var quantityAvailable = 1000000;
+var homeslider_loop = '1';
+var homeslider_pause = '5000';
+var homeslider_speed = '500';
+var homeslider_width = '1168';
+
+var img_dir = '';
+var quickView = true;
+var roundMode = 2;
+var search_url = '';
+</script>
+<%= javascript_include_tag 'sanpham', 'data-turbolinks-track' => true %>
+<script>
+	function login()
+	{
+		
+		$("#imgloading2").show();
+		var email = $("#logemail").val();
+		var passwd = $("#logpasswd").val();
+		var hashData = new Object();
+		hashData["email"] = email;
+		hashData["passwd"] = passwd;
+		$.ajax({
+		url:"/customers/check_login",
+		data: { 'hdata' : hashData},
+		success:function(result){
+			$("#imgloading2").hide();
+			if(parseInt(result) == 1)
+			{
+				window.location.href = "/";
+			}else{
+				alert("Thông tin đăng nhập không chính xác !");
+			} 
+	  }});
+	
+	}
+	$(".paypal_checkout").click(function(){
+		$("#order_pay_kind").val(1);
+	});
+	
+	$("#btnCheckCoupon").click(function(){
+		$("#imgloading4").show();
+		if($("#txtCode").val())
+		{
+			var code = $("#txtCode").val();
+			$.ajax({url:"/orders/"+code+"/check_coupon",success:function(result){
+		    		$("#imgloading4").hide();
+		    		if(result ==1)
+		    		{
+		    			alert("Mã giảm giá hợp lệ !");
+		    			location.reload();	    			
+		    		}else{
+		    			alert("Mã giảm giá không đúng !");
+		    		}
+		    		
+		  }});
+		}else{
+			alert("Vui lòng nhập mã giảm giá !");
+			$("#imgloading4").hide();
+		}
+		
+	});
+	function cart_change_down(name,id){
+		if(parseInt($("#"+name).val()) > 1){ cart_change(id,parseInt($("#"+name).val())-1);
+		}else{ cart_change(id,parseInt($("#"+name).val()));}
+	}
+	function cart_change_up(name,id){
+		if(parseInt($("#"+name).val()) >= 1) { cart_change(id,parseInt($("#"+name).val())+1);}
+	}
+	function cart_change(product_id,qty)
+	{
+		//alert(product_id+'sl : ' + qty);
+		$.ajax({url:"/orders/"+product_id+"/"+qty,success:function(result){
+	    location.reload();
+	  }});
+	}
+	
+	function acc_email()
+	{
+		$("#imgloading").show();
+		var cus_email = $("#txtEmail").val();
+		if (cus_email)
+		{
+			if(validateEmail(cus_email))
+			{
+				$.ajax({
+				url:"/customers/new",
+				data: { 'cus_email' : cus_email},
+				type: "GET",
+				dataType: 'html',
+				success:function(result){
+					$(".colsm6register").hide();
+					$("#create_account_error").html("Tạo tài khoản thành công ! Vui lòng kiểm tra hộp thư "+ cus_email + " để lấy mật khẩu đăng nhập.");
+					$(".colsm6registersuccess").show();
+			  }});	
+			}else{
+				alert("Vui lòng nhập địa chỉ Email hợp lệ !");
+				$("#imgloading").hide();
+			}
+			
+		}else{
+			alert("Vui lòng nhập địa chỉ Email !");
+			$("#imgloading").hide();
+		}
+		
+	}
+	function del_product(product_id)
+	{
+		var cf = confirm("Bạn có chắc muốn xóa sản phẩm này ?");
+		if (cf == true) {
+			$.ajax({url:"/orders/"+product_id+"/del",success:function(result){
+		    location.reload();
+		    }});
+	   }
+	}
+	function validateEmail(email) { 
+	    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	} 
+</script>
+</body>
+</html>

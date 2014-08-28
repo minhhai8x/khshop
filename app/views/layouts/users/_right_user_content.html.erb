@@ -1,0 +1,47 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Danh sách người dùng</h5>
+      </div>
+      <!-- end box / title -->
+      <div class="table">
+      	<div class="action">
+		<div class="button">
+			<%= link_to "Thêm người dùng",new_admin_user_path,:class=>"ui-button ui-widget ui-state ui-corner-all"%>
+		</div>
+	  </div>
+	  <br clear="all" /><br clear="all" />
+        <form action="" method="post">
+          <table>
+            <thead>
+              <tr>
+              	<th class="selected">STT</th>
+                <th>Email</th>
+                <th>Ngày tạo</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @admin_users.each.with_index do |as,index| %>
+              <tr>
+              	<td class="selected"><%=index+1%></td>
+                <td class="date"><%= as.email %></td>
+                <td class="price"><%= as.created_at %></td>
+                <td class="category">
+                <div class="btncontrol">
+                	<%= link_to image_tag(asset_path('admin/pencil.png')), edit_admin_user_path(as), :title=>"Sửa"%>
+                    <div style="width:10px;"></div>
+                    <%= link_to image_tag(asset_path('admin/remove.png')), as, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa ?' }, :title=>"Xóa" %>
+                </div>
+                </td>
+              </tr>
+             <%end%> 
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <!-- end table --> 
+</div>

@@ -1,0 +1,49 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Danh sách Coupon</h5>
+      </div>
+      <!-- end box / title -->
+      <div class="table">
+      	<div class="action">
+		<div class="button">
+			<%= link_to "Thêm mới Coupon",new_admin_coupon_path,:class=>"ui-button ui-widget ui-state ui-corner-all"%>
+		</div>
+	  </div>
+	  <br clear="all" /><br clear="all" />
+        <form action="" method="post">
+          <table>
+            <thead>
+              <tr>
+              	<th class="selected">STT</th>
+                <th>Tên Coupon</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @admin_coupons.each.with_index  do |cp,index| %>	
+              <tr>
+              	<td class="selected"><%=index+1%></td>
+                <td class="date"><%= cp.name %></td>
+                <td class="price"><%= cp.start_date %></td>
+                <td class="price"><%= cp.end_date %></td>
+                <td class="category">
+                <div class="btncontrol">
+                	<%= link_to image_tag(asset_path('admin/pencil.png')), edit_admin_coupon_path(cp), :title=>"Sửa"%>
+                    <div style="width:10px;"></div>
+                    <%= link_to image_tag(asset_path('admin/remove.png')), cp, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa ?' }, :title=>"Xóa" %>
+                </div>
+                </td>
+              </tr>
+             <%end%> 
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <!-- end table --> 
+</div>

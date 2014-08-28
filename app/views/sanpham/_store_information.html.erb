@@ -1,0 +1,32 @@
+<div class="clearfix row">
+    <div id="fb-root"></div>
+    <div id="facebook_block" class="col-xs-4">
+      <div class="facebook_block_inset">
+        <h4>Tìm chúng tôi trên Facebook</h4>
+        <div class="facebook-fanbox">
+          <iframe scrolling="no" frameborder="0" src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com/pages/<%= store_info.s_fb_name%>/<%= store_info.s_fb_appid%>&amp;width=313&amp;colorscheme=light&amp;connections=16&amp;stream=false&amp;header=true&amp;height=182" style="border:none; overflow:hidden; width:313px; height:182px;" allowtransparency="true"></iframe>
+        </div>
+      </div>
+    </div>
+    <div id="cmsinfo_block" class="col-xs-8">
+      <div class="clearfix row">
+        <div class="col-xs-6">
+          <div class="cmsinfo_block_inset">
+            <h3>Về chúng tôi</h3>
+            <p><%= store_info.s_description%></p>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="cmsinfo_block_inset">
+            <h3>Thông tin cửa hàng</h3>
+            <ul class="list-custom-right">
+              <li><em class="icon-map-marker"></em> <strong><%= store_info.s_address%></strong></li>
+              <li><em class="icon-phone"></em> <strong>Hãy gọi tôi: <%= store_info.s_phone%></strong></li>
+              <li><em class="icon-envelope-alt"></em> <strong>Email: <a class="__cf_email__" href="https://mail.google.com/mail/?view=cm&fs=1&to=<%= store_info.s_email%>"><%= store_info.s_email%></a></strong></li>
+              <li><em class="icon-skype"></em> <strong>Skype: <%= store_info.s_acc_skype%></strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

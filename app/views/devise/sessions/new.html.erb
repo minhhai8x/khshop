@@ -1,0 +1,48 @@
+<!DOCTYPE >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'login', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+</head>
+<body>
+ <div class="container">
+<!-- Codrops top bar -->
+<section>				
+    <div id="container_demo" >
+        <a class="hiddenanchor" id="toregister"></a>
+        <a class="hiddenanchor" id="tologin"></a>
+        <div id="wrapper">
+            <div id="login" class="animate form">
+            <!--div class="message tip error_off">
+                <span class="strong">THÔNG BÁO!</span>
+                <div id="message_error"></div>
+            </div-->
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %> 
+                    <h1>Administrator</h1> 
+                    <p> 
+                        <label for="username" class="uname" data-icon="u" > Email</label>
+                        <%= f.email_field :email, :class => "login-inp", autofocus: true%>
+                    </p>
+                    <p> 
+                        <label for="password" class="youpasswd" data-icon="p"> Password </label>
+                        <%= f.password_field :password, :class => "login-inp", autocomplete: "off" %>
+                    </p>
+                    
+                    <p class="login button"> 
+                        <%= f.submit "Login", :class =>"submit-login" %>
+                    </p>
+                    <p class="change_link">
+                        <%= link_to "Quên mật khẩu ?", new_password_path(resource_name), :class =>"to_register" %>
+                    </p>
+                <%end%>
+            </div>
+            
+        </div>
+    </div>  
+</section>
+</div>
+</body>
+</html>

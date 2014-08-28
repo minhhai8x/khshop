@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @admin_coupon.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @admin_coupon.code %>
+</p>
+
+<p>
+  <strong>Discount:</strong>
+  <%= @admin_coupon.discount %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @admin_coupon.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @admin_coupon.end_date %>
+</p>
+
+<p>
+  <strong>Is login:</strong>
+  <%= @admin_coupon.is_login %>
+</p>
+
+<p>
+  <strong>Is free ship:</strong>
+  <%= @admin_coupon.is_free_ship %>
+</p>
+
+<p>
+  <strong>Apply products:</strong>
+  <%= @admin_coupon.apply_products %>
+</p>
+
+<p>
+  <strong>Apply catalogues:</strong>
+  <%= @admin_coupon.apply_catalogues %>
+</p>
+
+<p>
+  <strong>Max times:</strong>
+  <%= @admin_coupon.max_times %>
+</p>
+
+<p>
+  <strong>Max times cus:</strong>
+  <%= @admin_coupon.max_times_cus %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @admin_coupon.status %>
+</p>
+
+<%= link_to 'Edit', edit_admin_coupon_path(@admin_coupon) %> |
+<%= link_to 'Back', admin_coupons_path %>

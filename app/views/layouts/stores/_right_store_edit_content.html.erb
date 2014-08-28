@@ -1,0 +1,140 @@
+<div id="right"> 
+    <div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Thay đổi thông tin cửa hàng</h5>
+<ul class="links ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#box-left-forms">Thông tin chung</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other">Mạng xã hội</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other-link">Liên kết</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other-promotion">Thương mại</a></li>
+</ul>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for @admin_store, :html => { :multipart => true } do |f| %>
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+<div class="field">
+  <div class="label"><label for="input-small">&nbsp;</label></div>
+  <div class="input"><img src="<%= @admin_store.s_logo%>" /></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Tên cửa hàng:</label></div>
+  <div class="input"><%= f.text_field :s_name, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Mô tả:</label></div>
+  <div class="textarea textarea-editor"><%= f.text_area :s_description%></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Địa chỉ:</label></div>
+  <div class="input"><%= f.text_field :s_address, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Điện thoại:</label></div>
+  <div class="input"><%= f.text_field :s_phone, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Email:</label></div>
+  <div class="input"><%= f.text_field :s_email, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Logo:</label></div>
+  <div class="input input-file"><%= f.file_field :s_logo, :class=>"file"%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[max-width: 330 pixel, max-height: 68 pixel]</div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+<div id="box-left-other" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tài khoản Skype:</label></div>
+  <div class="input"><%= f.text_field :s_acc_skype, :class=>"small" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Tài khoản Twitter:</label></div>
+  <div class="input"><%= f.text_field :s_acc_tw, :class=>"small" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Tiêu đề Facebook:</label></div>
+  <div class="input"><%= f.text_field :s_fb_title, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Tên Fanpage Facebook:</label></div>
+  <div class="input"><%= f.text_field :s_fb_name, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">AppID Facebook:</label></div>
+  <div class="input"><%= f.text_field :s_fb_appid, :class=>"small" %></div>
+</div>
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+<!-- end paragraphs -->
+</div>
+
+<div id="box-left-other-link" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Đường dẫn Facebook:</label></div>
+  <div class="input"><%= f.text_field :s_fb_link, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Sitemap:</label></div>
+  <div class="input"><%= f.text_field :s_sitemap, :class=>"medium" %></div>
+</div>
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+<!-- end paragraphs -->
+</div>
+
+<div id="box-left-other-promotion" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Năm thành lập:</label></div>
+  <div class="input"><%= f.text_field :c_year, :class=>"tiny" %></div>
+</div>
+
+
+<div class="field">
+  <div class="label"><label for="input-small">Đường dẫn:</label></div>
+  <div class="input"><%= f.text_field :c_link, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Slogan thương mại:</label></div>
+  <div class="input"><%= f.text_field :c_trade, :class=>"medium" %></div>
+</div>
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+<!-- end paragraphs -->
+</div>
+<%end%>
+</div>
+</div>

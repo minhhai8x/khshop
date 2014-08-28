@@ -1,0 +1,82 @@
+<div id="right"> 
+<div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Chỉnh sửa Voucher</h5>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for(@admin_voucher) do |f| %>
+  <!-- box / messages -->
+ <% if @admin_voucher.errors.any? %>
+  <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		<div class="messages">
+			<div class="message message-error" id="message-error">
+				<div class="image">
+					<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+				</div>
+				<div class="text">
+					<h6>Có <%= pluralize(@admin_voucher.errors.count, "lỗi") %> xảy ra !</h6>
+					<% @admin_voucher.errors.full_messages.each do |message| %>
+				        <span><%= message %></span>
+				    <% end %>
+				</div>
+				<div class="dismiss">
+					<a href="#message-error"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%end%>
+  <!-- end box / messages -->
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Mã Voucher:</label></div>
+  <div class="input"><%= f.text_field :v_code, :class=>"small" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Người gửi:</label></div>
+  <div class="input"><%= f.text_field :from_name, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Email người gửi:</label></div>
+  <div class="input"><%= f.text_field :from_email, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Người nhận:</label></div>
+  <div class="input"><%= f.text_field :to_name, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Email người nhận:</label></div>
+  <div class="input"><%= f.text_field :to_email, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Thông điệp:</label></div>
+  <div class="textarea textarea-editor"><%= f.text_area :v_messsage%></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Số tiền:</label></div>
+  <div class="input"><%= f.text_field :v_amount, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Tình trạng:</label></div>
+  <div class="select">
+    <%= f.select( :v_status, options_for_select([["Chưa kích hoạt",0],["Đã kích hoạt",1]], :selected=>f.object.v_status))%>                
+  </div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+
+<%end%>
+
+</div>
+</div>

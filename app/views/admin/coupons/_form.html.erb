@@ -1,0 +1,65 @@
+<%= form_for(@admin_coupon) do |f| %>
+  <% if @admin_coupon.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_coupon.errors.count, "error") %> prohibited this admin_coupon from being saved:</h2>
+
+      <ul>
+      <% @admin_coupon.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :discount %><br>
+    <%= f.text_field :discount %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :is_login %><br>
+    <%= f.text_field :is_login %>
+  </div>
+  <div class="field">
+    <%= f.label :is_free_ship %><br>
+    <%= f.number_field :is_free_ship %>
+  </div>
+  <div class="field">
+    <%= f.label :apply_products %><br>
+    <%= f.text_field :apply_products %>
+  </div>
+  <div class="field">
+    <%= f.label :apply_catalogues %><br>
+    <%= f.text_field :apply_catalogues %>
+  </div>
+  <div class="field">
+    <%= f.label :max_times %><br>
+    <%= f.number_field :max_times %>
+  </div>
+  <div class="field">
+    <%= f.label :max_times_cus %><br>
+    <%= f.number_field :max_times_cus %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

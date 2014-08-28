@@ -1,0 +1,41 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Danh sách đơn hàng</h5>
+      </div>
+      <!-- end box / title -->
+      <div class="table">
+        <form action="" method="post">
+          <table>
+            <thead>
+              <tr>
+              	<th class="selected">STT</th>
+                <th>Tên khách hàng</th>
+                <th>Địa chỉ</th>
+                <th>Tổng hóa đơn</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @admin_orders.each.with_index  do |admin_order,index| %>	
+              <tr>
+              	<td class="selected"><%=index+1%></td>
+                <td style="width: 10%;"><%= admin_order.cs_name%></td>
+                <td class="price"><%= admin_order.cs_address%></td>
+                <td class="price"><%= admin_order.cs_sum%></td>
+                <td  style="width: 1%;" class="category">
+                <div class="btncontrol">
+                	<%= link_to image_tag(asset_path('admin/pencil.png')), edit_admin_order_path(admin_order.id), :title=>"Sửa"%>
+                </div>
+                </td>
+              </tr>
+             <%end%> 
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <!-- end table --> 
+</div>

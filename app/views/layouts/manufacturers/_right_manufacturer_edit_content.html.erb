@@ -1,0 +1,68 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Thay đổi thông tin nhà sản xuất</h5>
+      </div>
+      <!-- end box / title -->
+      <!-- box / form -->
+      <%= form_for(@manufacturer) do |f| %>
+      <!-- box / messages -->
+      <% if @manufacturer.errors.any? %>
+      <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+			<div class="messages">
+				<div class="message message-error" id="message-error">
+					<div class="image">
+						<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+					</div>
+					<div class="text">
+						<h6>Có <%= pluralize(@manufacturer.errors.count, "lỗi") %> xảy ra !</h6>
+						<% @manufacturer.errors.full_messages.each do |message| %>
+					        <span><%= message %></span>
+					    <% end %>
+					</div>
+					<div class="dismiss">
+						<a href="#message-error"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%>
+	  <!-- end box / messages -->	
+        <div class="form">
+          <div class="fields">
+            <div class="field">
+              <div class="label"><label for="input-small">Tên nhà sản xuất:</label></div>
+              <div class="input"><%= f.text_field :name, :class=>"medium" %></div>
+            </div>
+            
+            <div class="field">
+              <div class="label"><label for="input-small">Địa chỉ:</label></div>
+              <div class="input"><%= f.text_field :address, :class=>"medium" %></div>
+            </div>
+            
+            <div class="field">
+              <div class="label"><label for="input-small">Điện thoại</label></div>
+              <div class="input"><%= f.text_field :phone, :class=>"medium" %></div>
+            </div>
+            
+            <div class="field">
+              <div class="label"><label for="select">Tình trạng:</label></div>
+              <div class="select">
+                <%= f.select( :status, options_for_select([["Chưa hợp tác",0],["Đã hợp tác",1]], :selected=>f.object.status))%>                
+              </div>
+            </div>
+            
+            <div class="buttons">
+              <%= f.submit "Lưu lại",:class=>"form-submit" %>
+              <input type="reset" value="Reset" name="reset">
+            </div>
+            
+          </div>
+        </div>
+      <%end%>
+      <!-- end box / form -->
+    </div>
+    <!-- end table --> 
+</div>

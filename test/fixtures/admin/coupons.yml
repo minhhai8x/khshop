@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  discount: MyString
+  start_date: 2014-08-11
+  end_date: 2014-08-11
+  is_login: 
+  is_free_ship: 1
+  apply_products: MyString
+  apply_catalogues: MyString
+  max_times: 1
+  max_times_cus: 1
+  status: 1
+
+two:
+  name: MyString
+  code: MyString
+  discount: MyString
+  start_date: 2014-08-11
+  end_date: 2014-08-11
+  is_login: 
+  is_free_ship: 1
+  apply_products: MyString
+  apply_catalogues: MyString
+  max_times: 1
+  max_times_cus: 1
+  status: 1

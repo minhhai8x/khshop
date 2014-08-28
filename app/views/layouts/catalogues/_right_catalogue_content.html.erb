@@ -1,0 +1,47 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Danh sách thể loại</h5>
+      </div>
+      <!-- end box / title -->
+      <div class="table">
+      	<div class="action">
+		<div class="button">
+			<%= link_to "Thêm thể loại",new_admin_catalogue_path,:class=>"ui-button ui-widget ui-state ui-corner-all"%>
+		</div>
+	  </div>
+	  <br clear="all" /><br clear="all" />
+        <form action="" method="post">
+          <table>
+            <thead>
+              <tr>
+              	<th class="selected">STT</th>
+                <th>Tên thể loại</th>
+                <th>Ngày đăng</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @admin_catalogues.each.with_index  do |admin_cat,index| %>	
+              <tr>
+              	<td class="selected"><%=index+1%></td>
+                <td class="date"><%= admin_cat.name %></td>
+                <td class="price"><%= admin_cat.created_at %></td>
+                <td class="category">
+                <div class="btncontrol">
+                	<%= link_to image_tag(asset_path('admin/pencil.png')), edit_admin_catalogue_path(admin_cat), :title=>"Sửa"%>
+                    <div style="width:10px;"></div>
+                    <%= link_to image_tag(asset_path('admin/remove.png')), admin_cat, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa ?' }, :title=>"Xóa" %>
+                </div>
+                </td>
+              </tr>
+             <%end%> 
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <!-- end table --> 
+</div>

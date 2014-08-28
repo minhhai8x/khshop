@@ -1,0 +1,48 @@
+<div id="left">
+	<div id="menu">
+      <h6 id="h-menu-products" class="selected"><a href="#products"><span>Thanh tác vụ</span></a></h6>
+      <ul id="menu-products" class="opened">
+        <li class="collapsible"> <a class="collapsible plus">Danh mục</a>
+          <ul class="collapsed">
+            <li><a href="<%= admin_catalogues_path%>">Thể loại</a></li>
+            <li><a href="<%= admin_products_path%>">Sản phẩm</a></li>
+            <li><a href="<%= admin_attributes_path%>">Thuộc tính</a></li>
+            <li><a href="<%= manufacturers_path%>">Nhà sản xuất</a></li>
+            <li  class="last"><a href="<%= edit_admin_store_path(1)%>">Thông tin</a></li>
+          </ul>
+        </li>
+        <li class="collapsible"> <a class="collapsible plus">Hệ thống</a>
+          <ul class="collapsed">
+            <li><a href="<%= edit_admin_systemconfig_path(1)%>">Cấu hình</a></li>
+            <li class="last"><a href="<%= admin_users_path%>">Người dùng</a></li>
+            <li><a href="#backup">Backup/Restore</a></li>
+            <li><a href="<%= edit_admin_mymailer_path(1)%>">Email</a></li>
+          </ul>
+        </li>
+        <li class="collapsible"> <a class="collapsible plus">Sales</a>
+          <ul class="collapsed">
+            <li><a href="<%= admin_orders_path%>">Đơn hàng</a></li>
+            <li class="last"><a href="<%= admin_users_path%>">Khách hàng</a></li>
+            <li><a href="<%= admin_coupons_path%>">Coupons</a></li>
+            <li><a href="<%= admin_vouchers_path%>">Gift Vouchers</a></li>
+          </ul>
+        </li>
+        <li class="collapsible"> <a class="collapsible plus">Báo cáo</a>
+          <ul class="collapsed">
+            <li><a href="<%= admin_orders_path%>/report">Đơn hàng</a></li>
+            <li><a href="<%= admin_products_path%>/p_report">Sản phẩm</a></li>
+            <li><a href="<%= admin_myreports_cus_view_buy_path%>">Khách hàng</a></li>
+          </ul>
+        </li>
+        <li class="collapsible last"><a href="#"></a></li>
+      </ul>
+      <h6 id="h-menu-settings"><a href="#menu1"><span>Banner</span></a></h6>
+      <ul id="menu-menu1" class="closed">
+        <li><a href="<%= new_admin_banner_path%>">Thêm mới banner</a></li>
+        <li class="last"><a href="<%= admin_banners_path%>">Danh sách banner</a></li>
+        <li class="last"><a href="<%= edit_admin_banner_config_path(1)%>">Cấu hình</a></li>
+      </ul>
+      
+    </div>
+<div id="date-picker"></div>
+</div>

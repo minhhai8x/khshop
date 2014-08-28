@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>KH Shop</title>
+<meta name="generator" content="haiwebcc"/>
+<meta name="robots" content="index,follow"/>
+<meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<%= stylesheet_link_tag    'sanpham', media: 'all', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+</head>
+<body id="product" class="product product-1 product-lorem-ipsum-dolor-sit-amet category-2 category-home hide-left-column hide-right-column lang_en">	
+<div id="page">
+  <div id="toTop" style="display: block;"></div>
+  <div class="main-wrap-center">
+<div class="main-wrap">
+  <%= render 'sanpham/header' %>
+  <div class="columns-container">
+<div class="container" id="columns">
+	
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+<a title="Trang chủ" href="<%= root_path%>" class="home"><i class="icon-home"></i></a>
+<span class="navigation-pipe">&gt;</span>
+<span class="navigation_page"><%= @product.name%></span>
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+<div class="center_column col-xs-12 col-sm-12" id="top_column"></div>
+</div>
+<div class="row">
+<div class="center_column col-xs-12 col-sm-12" id="center_column">
+<div class="primary_block row">
+<div class="container"><div class="top-hr"></div></div>
+<!-- left infos-->  
+<div class="pb-left-column col-xs-12 col-sm-4 col-md-5">
+<!-- product img-->        
+<div class="clearfix" id="image-block">
+<span class="sale-box no-print">
+<span class="sale-label">Sale!</span>
+</span>
+<span id="view_full_size">
+<a href="<%= @product.image%>" title="<%= @product.name%>" class="jqzoom" rel='gal1' >
+	<img alt="<%= @product.name%>" title="<%= @product.name%>" src="<%= @product.image%>" style="opacity: 1;">
+</a>
+</span>
+</div> <!-- end image-block -->
+</div> <!-- end pb-left-column -->
+<!-- end left infos--> 
+<!-- center infos -->
+<div class="pb-center-column col-xs-12 col-sm-4">
+<p class="online_only">Online only</p>
+<h1><%= @product.name%></h1>
+<p id="product_condition">
+<label>Tình trạng :</label>
+<span itemprop="condition" class="editable">Mới</span>
+</p>
+<div id="short_description_block">
+<p class="buttons_bottom_block">Danh mục :<a href="<%= sanpham_path%>/<%= @category.id%>"><%= @category.name%></a></p>
+</div>
+<p class="socialsharing_product list-inline no-print">
+<button onclick="socialsharing_twitter_click('Chia sẻ sản phẩm ')"  class="btn btn-default btn-twitter" type="button">
+<i class="icon-twitter"></i> Tweet
+</button>
+<button onclick="socialsharing_facebook_click();" class="btn btn-default btn-facebook" type="button">
+<i class="icon-facebook"></i> Share
+</button>
+<button onclick="socialsharing_google_click();" class="btn btn-default btn-google-plus" type="button">
+<i class="icon-google-plus"></i> Google+
+</button>
+</p>
+ 
+<div class="no-print" id="product_comments_block_extra">
+<ul class="comments_advices">
+<li>
+<a class="reviews" ><%= @product.is_view%> người đã xem</a>
+</li>
+</ul>
+</div>
+<!--  /Module ProductComments -->
+</div>
+<!-- end center infos-->
+<!-- pb-right-column-->
+<div class="pb-right-column col-xs-12 col-sm-4 col-md-3">
+<!-- add to cart form-->
+<form method="post" action="#cart" id="buy_block">
+<!-- hidden datas -->
+<p class="hidden">
+
+<input type="hidden" value="1" id="idCombination" name="id_product_attribute">
+</p>
+<div class="box-info-product">
+<div class="content_prices clearfix">
+			<!-- prices -->
+<div class="price">
+<% if @product.discount?%>	
+<p class="our_price_display"><span id="our_price_display"><%= number_to_currency(@product.price*((100-@product.discount))/100)%></span></p>
+<p id="reduction_percent"><span id="reduction_percent_display">-<%= @product.discount%>%</span></p>
+<p id="old_price"><span id="old_price_display"><%= number_to_currency(@product.price)%></span></p>
+<%else%>
+<p class="our_price_display"><span id="our_price_display"><%= number_to_currency(@product.price)%></span></p>
+<%end%>
+</div> <!-- end prices -->																			 
+<div class="clear"></div>
+</div> <!-- end content_prices -->
+<div class="product_attributes clearfix">
+<!-- quantity wanted -->
+<p id="quantity_wanted_p">
+<label>Số lượng:</label>
+<input type="text" value="1" class="text" id="quantity_wanted" name="qty" style="border: 1px solid rgb(189, 194, 201);">
+<a class="btn btn-default button-minus product_quantity_down" data-field-qty="qty" href="#">
+<span><i class="icon-minus"></i></span>
+</a>
+<a class="btn btn-default button-plus product_quantity_up " data-field-qty="qty" href="#">
+<span><i class="icon-plus"></i></span>
+</a>
+</p>
+	</div> <!-- end product_attributes -->
+<div class="box-cart-bottom">
+<div>
+<p class="buttons_bottom_block no-print" id="add_to_cart">
+<button  onclick="btn_add_to_cart(<%= @product.id%>)"  class="exclusive" name="btnMuangay" type="button"><span>Mua ngay</span></button>
+</p>
+</div>
+<!-- Productpaymentlogos module -->
+<div id="product_payment_logos">
+<div class="box-security">
+<h5 class="product-heading-h5"></h5> 
+<a title="" href=""><img alt="" src="<%=asset_path('index/payment-logo.png')%>"></a>
+</div>
+</div>
+<!-- /Productpaymentlogos module -->
+<strong></strong>
+</div> <!-- end box-cart-bottom -->
+</div> <!-- end box-info-product -->
+</form>
+</div> <!-- end pb-right-column-->
+</div> <!-- end primary_block -->
+
+<!--HOOK_PRODUCT_TAB -->
+<section class="page-product-box">
+<h3 class="idTabHrefShort page-product-heading" id="#idTab5">Chi tiết sản phẩm</h3> 
+<div id="idTab5">
+<div id="product_comments_block_tab">
+<div class="comment row">
+<div class="comment_author col-sm-2"><div class="comment_author_infos"><strong>Cập nhật ngày :</strong><em><%= @product.updated_at%></em></div></div>
+<div class="comment_details col-sm-10"><p class="title_block"><strong><%= @product.name%></strong></p>
+<p><%= @product.description%></p>
+</div><!-- .comment_details -->
+</div> <!-- .comment -->
+</div> <!-- #product_comments_block_tab -->
+</div>
+</section>
+<!--end HOOK_PRODUCT_TAB -->
+<% if @attrs.count > 0%>
+<!--SPECIAL_PRODUCT_TAB -->
+<section class="page-product-box">
+<h3 class="idTabHrefShort page-product-heading" id="#idTab5">Tính năng nổi trội</h3> 
+<div id="idTab5">
+<div id="product_comments_block_tab">
+
+<% @attrs.each do |at| %>	
+<div class="comment row">
+<div class="comment_author col-sm-2"><div class="comment_author_infos"><strong><%= at.name%></strong></div></div>
+<div class="comment_details col-sm-10"><p class="title_block"><strong><%= at.description%></strong></p>
+</div><!-- .comment_details -->
+</div> <!-- .comment -->
+<%end%>
+</div> <!-- #product_comments_block_tab -->
+</div>
+</section>
+<!--end SPECIAL_PRODUCT_TAB -->
+<%end%>
+<section id="blockpack">
+<h3 class="page-product-heading">Sản phẩm cùng thể loại</h3>		
+<!-- Products list -->
+<ul class="product_list grid row">
+<% @same_products.each do |sp|%>
+  <li class="ajax_block_product col-xs-12 col-sm-4 col-md-3 first-item-of-mobile-line">
+    <div class="product-container" >
+      <div class="left-block">
+        <div class="product-image-container"> 
+        	<a class="product_img_link" href="<%= sanpham_path%>/detail/<%= sp.id%>" title="<%= sp.name%>" >
+        		<img class="img-responsive" src="<%= sp.image%>" alt="<%= sp.name%>" title="<%= sp.name%>" />
+        	 </a> 
+          <!--span class="new-box"> <span class="new-label">New</span> </span> <span class="sale-box"> <span class="sale-label">Sale!</span> </span--> </div>
+      </div>
+      <div class="right-block">
+        <h5> <a class="product-name" href="<%= sanpham_path%>/detail/<%= sp.id%>" title="<%= sp.name%>" ><%= sp.name.to_s.split(" ").first(6).join(" ")%></a> </h5>
+        <div class="comments_note" ><span class="nb-comments"><% if system_config.is_viewer == 1%> <%= sp.is_view%> Người đã xem<%end%></span></div>
+        <% if system_config.is_description == 1%>
+        <p class="grid-desc"><%= sp.description.to_s.split(" ").first(20).join(" ")%>...</p>
+        <%end%>
+        
+        <div class="content_price"> 
+        	<% if sp.discount?%>
+			<span class="price product-price" ><%= number_to_currency(sp.price*((100-sp.discount))/100)%></span>
+			<span class="old-price product-price"><%= number_to_currency(sp.price)%></span>
+			<span class="price-percent-reduction">- <%= sp.discount%> %</span>
+			<%else%>
+			<span class="price product-price" ><%= number_to_currency(sp.price)%></span>
+			<%end%>
+        </div>
+        
+        <div class="button-container"><a class="button ajax_add_to_cart_button btn btn-default"  onclick="add_to_cart(<%= sp.id%>)"  title="Thêm vào giỏ hàng" ><span><div class="mcart">&nbsp;</div></span></a>
+        <a class="button lnk_view btn btn-default" href="<%= sanpham_path%>/detail/<%= sp.id%>" title="Xem chi tiết"> <span>Chi tiết</span> </a></div>
+        </div>
+    </div>
+  </li>
+ <%end%>
+</ul>
+</section>
+</div><!-- #center_column -->
+</div><!-- .row -->
+</div>
+  </div>
+  <%= render 'sanpham/footer' %>
+</div>
+  </div>
+</div>
+<script>
+function add_to_cart(id)
+{
+	$.ajax({url:"/sanpham/"+id+"/add_to_cart",success:function(result){
+	    alert("Thêm vào giỏ hàng thành công !");
+	  }});
+}
+function btn_add_to_cart(id)
+{
+	var qty = $("#quantity_wanted").val();
+	var id_qty = id+'-'+qty;
+	$.ajax({url:"/sanpham/"+id_qty+"/btn_add_to_cart",success:function(result){
+	    window.location.href = "<%= orders_path%>";
+	 }});
+}
+</script>
+<script type="text/javascript">
+var CUSTOMIZE_TEXTFIELD = 1;
+var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';
+var FancyboxboxI18nClose = 'Close';
+var contentOnly = false;
+var static_token = '';
+var baseDir = '';
+var baseUri = '';
+var blocksearch_type = 'top';
+var quantityAvailable = 399;
+var homeslider_loop = '1';
+var homeslider_pause = '5000';
+var homeslider_speed = '500';
+var homeslider_width = '1168';
+
+var img_dir = '';
+var quickView = true;
+var roundMode = 2;
+var search_url = '';
+</script>
+<%= javascript_include_tag 'sanpham_detail', 'data-turbolinks-track' => true %>
+<script type="text/javascript">
+        $(document).ready(function() {
+                /* simple call */
+                $('.jqzoom').jqzoom();
+              
+ 
+                /* more complex call*/
+                var options = {  
+                  zoomType: 'standard',  
+                  lens:true,  
+                  preloadImages: true,  
+                  alwaysOn:false,  
+                  zoomWidth: 300,  
+                  zoomHeight: 250,  
+                  xOffset:90,  
+                  yOffset:30,  
+                  position:'left'  
+                  //...MORE OPTIONS  
+               };
+  
+               $('.jqzoom').jqzoom(options); 
+        });
+</script>
+</body>
+</html>

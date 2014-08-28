@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lg_title: MyString
+  lg_description: MyString
+  lg_url: MyString
+  lg_type: 1
+  lg_btntitle: MyString
+  lg_link: MyString
+  lg_status: 1
+
+two:
+  lg_title: MyString
+  lg_description: MyString
+  lg_url: MyString
+  lg_type: 1
+  lg_btntitle: MyString
+  lg_link: MyString
+  lg_status: 1

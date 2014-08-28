@@ -1,0 +1,29 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Thống kê đơn hàng trong tháng</h5>
+      </div>
+       <div class="action" style="margin-bottom: 30px;">
+		<div class="button">
+			<a href="<%= admin_o_export_path%>" id="dl"  class="ui-button ui-widget ui-state ui-corner-all">Xuất file Excel</a>
+		</div>
+	  </div>
+	  
+	  <script>
+      	var data = <%= @order_report%>;
+      	var p_label = "Đơn hàng";
+      </script>
+      <%= javascript_include_tag 'report'%>
+      <!-- end box / title -->
+      <div class="sales"><div id="sales"></div></div>
+    </div>
+    <!-- end table -->
+    <script>
+      	$(document).on("click", "a#dl", function () {
+			    $.fileDownload($("#dl").prop('href'), {});
+			    return false;
+			});
+      </script> 
+</div>

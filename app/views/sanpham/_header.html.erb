@@ -1,0 +1,80 @@
+<div class="header-container">
+    <header id="header">
+      <div class="banner">
+        <div class="container">
+          <div class="row"> </div>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="container">
+          <div class="row">
+            <nav>
+              
+              	<% if session[:customer].nil?%>
+              	<div class="header_user_info"> 
+              	<a class="login" href="<%= customers_login_path%>" rel="nofollow" title="Đăng nhập / Đăng ký">Đăng nhập / Đăng ký</a>
+              	</div>
+              	<%else%>
+              	<div id="languages-block-top" class="languages-block">
+                <div class="current"> <span><%= session[:customer]%></span> </div>
+                <ul id="first-languages" class="languages-block_ul toogle_content">
+                  <li class="selected"><a href="<%= customers_logout_path%>"><span>Đăng xuất</span></a></li>
+                </ul>
+              	</div>
+              	
+              	<%end%> 
+              
+              <div id="currencies-block-top">
+                <form id="setCurrency" action="" method="post">
+                  <div class="current">
+                    <input type="hidden" name="id_currency" id="id_currency" value=""/>
+                    <input type="hidden" name="SubmitCurrency" value=""/>
+                    <span class="cur-label">Currency :</span> <strong>USD</strong> </div>
+                  <ul id="first-currencies" class="currencies_ul toogle_content">
+                    <li class="selected"> <a href="javascript:setCurrency(1);" rel="nofollow" title="Dollar"> Dollar </a> </li>
+                    <li> <a href="javascript:setCurrency(2);" rel="nofollow" title="Euro"> Euro </a> </li>
+                  </ul>
+                </form>
+              </div>
+              
+              <div id="contact-link"> <a href="<%= about_path%>" title="Về chúng tôi">Về chúng tôi</a> </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="container">
+          <div class="row">
+            <div id="header_logo"> <a href="<%= root_path%>" title="<%= store_info.s_name%>"> <img class="logo" src="<%= store_info.s_logo%>" alt="<%= store_info.s_name%>" /> </a> </div>
+            <div id="search_block_top" class="col-sm-4 clearfix">
+              <%= form_tag('/search', id: "searchbox",method: "post") do %>	
+                <%= text_field_tag :keyword, nil,id: 'search_query_top' ,class: 'search_query form-control', placeholder: 'Nhập từ khóa ...'%>
+                <button type="submit" name="submit_search" class="btn btn-default button-search"> <span>Search</span> </button>
+              <%end%>
+            </div>
+            <div class="col-sm-4 clearfix">
+              <div class="shopping_cart"> 
+              	<a href="<%= orders_path%>" title="Xem giỏ hàng" rel="nofollow"> <b>Giỏ hàng</b><span class="ajax_cart_no_product">&nbsp;(<b><%= cart_qty%></b>)</span> </a>
+              </div>
+            </div>
+            <div id="block_top_menu" class="sf-contener clearfix col-lg-12">
+              <ul class="sf-menu clearfix menu-content">
+              <% @cats.each do |c| %>
+                <li><a href="<%= sanpham_path%>/<%= c.id%>" title="<%= c.name%>"><%= c.name%></a>
+                
+                <% if get_submenu(c.id.to_i).any?%>
+                  <ul>
+                  	<% get_submenu(c.id.to_i).each do |sm| %>
+                    <li><a href="<%= sanpham_path%>/<%= sm.id%>" title="<%= sm.name%>"><%= sm.name%></a></li>
+                    <%end%>
+                  </ul>
+                <%end%>  
+                </li>
+              <%end%>  
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>

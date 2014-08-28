@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @admin_attribute.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @admin_attribute.description %>
+</p>
+
+<p>
+  <strong>Orderby:</strong>
+  <%= @admin_attribute.orderby %>
+</p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @admin_attribute.product_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_attribute_path(@admin_attribute) %> |
+<%= link_to 'Back', admin_attributes_path %>

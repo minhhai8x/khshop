@@ -1,0 +1,2 @@
+module MycompareHelper
+end

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @admin_systemconfig.country %>
+</p>
+
+<p>
+  <strong>Backend lang:</strong>
+  <%= @admin_systemconfig.backend_lang %>
+</p>
+
+<p>
+  <strong>Frontend lang:</strong>
+  <%= @admin_systemconfig.frontend_lang %>
+</p>
+
+<p>
+  <strong>Currency:</strong>
+  <%= @admin_systemconfig.currency %>
+</p>
+
+<p>
+  <strong>Number bestbuy:</strong>
+  <%= @admin_systemconfig.number_bestbuy %>
+</p>
+
+<p>
+  <strong>Number bestsell:</strong>
+  <%= @admin_systemconfig.number_bestsell %>
+</p>
+
+<p>
+  <strong>Number category:</strong>
+  <%= @admin_systemconfig.number_category %>
+</p>
+
+<p>
+  <strong>Is viewer:</strong>
+  <%= @admin_systemconfig.is_viewer %>
+</p>
+
+<p>
+  <strong>Is description:</strong>
+  <%= @admin_systemconfig.is_description %>
+</p>
+
+<p>
+  <strong>Google access:</strong>
+  <%= @admin_systemconfig.google_access_id %>
+</p>
+
+<p>
+  <strong>Google secret key:</strong>
+  <%= @admin_systemconfig.google_secret_key %>
+</p>
+
+<p>
+  <strong>Google bucket:</strong>
+  <%= @admin_systemconfig.google_bucket %>
+</p>
+
+<p>
+  <strong>Google analytic:</strong>
+  <%= @admin_systemconfig.google_analytic_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_systemconfig_path(@admin_systemconfig) %> |
+<%= link_to 'Back', admin_systemconfigs_path %>

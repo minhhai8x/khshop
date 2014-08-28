@@ -1,0 +1,39 @@
+<h1>Listing customers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cus name</th>
+      <th>Cus address</th>
+      <th>Cus phone</th>
+      <th>Cus email</th>
+      <th>Cus points</th>
+      <th>Cus image</th>
+      <th>Cus oauth</th>
+      <th>Cus status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.cus_name %></td>
+        <td><%= customer.cus_address %></td>
+        <td><%= customer.cus_phone %></td>
+        <td><%= customer.cus_email %></td>
+        <td><%= customer.cus_points %></td>
+        <td><%= customer.cus_image %></td>
+        <td><%= customer.cus_oauth %></td>
+        <td><%= customer.cus_status %></td>
+        <td><%= link_to 'Show', customer %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer', new_customer_path %>

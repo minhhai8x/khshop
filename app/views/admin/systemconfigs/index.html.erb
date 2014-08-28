@@ -1,0 +1,49 @@
+<h1>Listing admin_systemconfigs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Backend lang</th>
+      <th>Frontend lang</th>
+      <th>Currency</th>
+      <th>Number bestbuy</th>
+      <th>Number bestsell</th>
+      <th>Number category</th>
+      <th>Is viewer</th>
+      <th>Is description</th>
+      <th>Google access</th>
+      <th>Google secret key</th>
+      <th>Google bucket</th>
+      <th>Google analytic</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_systemconfigs.each do |admin_systemconfig| %>
+      <tr>
+        <td><%= admin_systemconfig.country %></td>
+        <td><%= admin_systemconfig.backend_lang %></td>
+        <td><%= admin_systemconfig.frontend_lang %></td>
+        <td><%= admin_systemconfig.currency %></td>
+        <td><%= admin_systemconfig.number_bestbuy %></td>
+        <td><%= admin_systemconfig.number_bestsell %></td>
+        <td><%= admin_systemconfig.number_category %></td>
+        <td><%= admin_systemconfig.is_viewer %></td>
+        <td><%= admin_systemconfig.is_description %></td>
+        <td><%= admin_systemconfig.google_access_id %></td>
+        <td><%= admin_systemconfig.google_secret_key %></td>
+        <td><%= admin_systemconfig.google_bucket %></td>
+        <td><%= admin_systemconfig.google_analytic_id %></td>
+        <td><%= link_to 'Show', admin_systemconfig %></td>
+        <td><%= link_to 'Edit', edit_admin_systemconfig_path(admin_systemconfig) %></td>
+        <td><%= link_to 'Destroy', admin_systemconfig, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Systemconfig', new_admin_systemconfig_path %>

@@ -1,0 +1,23 @@
+<div id="header"> 
+  <!-- logo -->
+  <div id="logo"><h1><a>Trang quản trị</a></h1></div>
+  <!-- end logo --> 
+  <div id="header-inner">
+	<div id="home"> <a href="<%= root_path%>" title="Home"></a></div>
+<!-- quick -->
+<ul id="quick">
+	<li>
+        <a href="<%= edit_admin_user_path(current_user.id)%>"><span class="icon"><img src="<%=asset_path('admin/user.png')%>" alt="Links" /></span><span><%= current_user.email %></span></a>
+    </li>
+    <li> <a href="<%= admin_users_path%>" title="Settings"><span class="icon"><img src="<%=asset_path('admin/cog.png')%>" alt="Settings" /></span><span>Tài khoản</span></a>
+		<ul>
+          <li><a href="<%= edit_admin_user_path(current_user.id)%>">Profile</a></li>
+          <li class="last"><%= link_to "Ðăng xuất", destroy_user_session_path, :method => :delete %></li>
+        </ul>
+	</li>
+    </ul>
+<!-- end quick -->
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+</div>
+</div> 

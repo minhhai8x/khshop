@@ -1,0 +1,41 @@
+<%= form_for(@admin_banner_config) do |f| %>
+  <% if @admin_banner_config.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_banner_config.errors.count, "error") %> prohibited this admin_banner_config from being saved:</h2>
+
+      <ul>
+      <% @admin_banner_config.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bn_speed %><br>
+    <%= f.number_field :bn_speed %>
+  </div>
+  <div class="field">
+    <%= f.label :bn_pause %><br>
+    <%= f.number_field :bn_pause %>
+  </div>
+  <div class="field">
+    <%= f.label :bn_width %><br>
+    <%= f.number_field :bn_width %>
+  </div>
+  <div class="field">
+    <%= f.label :bn_random %><br>
+    <%= f.number_field :bn_random %>
+  </div>
+  <div class="field">
+    <%= f.label :bn_max_large %><br>
+    <%= f.number_field :bn_max_large %>
+  </div>
+  <div class="field">
+    <%= f.label :bn_max_small %><br>
+    <%= f.number_field :bn_max_small %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  v_code: MyString
+  from_name: MyString
+  from_email: MyString
+  to_name: MyString
+  to_email: MyString
+  v_messsage: MyString
+  v_amount: MyString
+  v_status: 1
+
+two:
+  v_code: MyString
+  from_name: MyString
+  from_email: MyString
+  to_name: MyString
+  to_email: MyString
+  v_messsage: MyString
+  v_amount: MyString
+  v_status: 1

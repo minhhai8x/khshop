@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title><%= @category.name%></title>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="<%= @category.meta_keyword%>">
+<meta name="description" content="<%= @category.meta_description%>" />
+<meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<%= stylesheet_link_tag    'sanpham', media: 'all', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+</head>
+<body id="category" class="category category-6 category-home-theater-systems hide-right-column lang_en">
+<div id="page">
+  <div class="main-wrap-center">
+<div class="main-wrap">
+  <%= render 'sanpham/header' %>
+  <div class="columns-container">
+<div class="container" id="columns">
+
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+<a title="Return to Home" href="<%= root_path%>" class="home"><i class="icon-home"></i></a>
+<span class="navigation-pipe">&gt;</span>
+<span class="navigation_page"><%= @category.name%></span>
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+<div class="center_column col-xs-12 col-sm-12" id="top_column"></div>
+</div>
+<div class="row">
+<%= render 'sanpham/left_menu_cat' %>
+	<div class="center_column col-xs-12 col-sm-9" id="center_column">
+<div class="content_scene_cat">
+ <!-- Category image -->
+<div class="content_scene_cat_bg">
+  <div class="cat_desc"><span class="category-name"><%= @category.name%></span></div>
+</div>
+  </div>
+<!-- Pagination -->
+<div class="content_sortPagiBar clearfix">
+<div class="top-pagination-content clearfix">
+<div class="pagination clearfix" id="pagination"></div>
+<div class="product-count"><%= paginate @products %></div>
+</div>
+</div>
+<!-- /Pagination -->
+<!-- Products list -->
+<ul class="product_list grid row">
+<% @products.each do |p| %>	
+<li class="ajax_block_product col-xs-12 col-sm-6 col-md-4 first-item-of-tablet-line first-item-of-mobile-line">
+<div class="product-container">
+<div class="left-block">
+<div class="product-image-container">
+<a title="<%= p.name%>" href="<%= sanpham_path%>/detail/<%= p.id%>" class="product_img_link">
+<img  title="<%= p.name%>" alt="<%= p.name%>" src="<%= p.image%>" class="img-responsive">
+</a>					
+<!--span class="new-box"><span class="new-label">New</span></span>
+<span class="sale-box"><span class="sale-label">Sale!</span></span-->
+</div>
+</div>
+<div class="right-block">
+<h5>
+<a title="<%= p.name%>" href="<%= sanpham_path%>/detail/<%= p.id%>" class="product-name"><%= p.name.to_s.split(" ").first(6).join(" ")%></a>
+</h5>
+<% if system_config.is_description == 1%>
+<p class="grid-desc"><%= p.description.to_s.split(" ").first(20).join(" ")%>...</p>
+<%end%>
+<div class="content_price">
+	<% if p.discount?%>
+	<span class="price product-price" ><%= number_to_currency(p.price*((100-p.discount))/100)%></span>
+	<span class="old-price product-price"><%= number_to_currency(p.price)%></span>
+	<span class="price-percent-reduction">- <%= p.discount%> %</span>
+	<%else%>
+	<span class="price product-price" ><%= number_to_currency(p.price)%></span>
+	<%end%>
+	
+</div>
+<div class="button-container">
+<a class="button ajax_add_to_cart_button btn btn-default" rel="nofollow" title="Thêm vào giỏ hàng" data-id-product="1"> 
+                        		<span><div onclick="add_to_cart(<%= p.id%>)" class="mcart">&nbsp;</div></span> </a>
+<a title="Xem chi tiết" href="<%= sanpham_path%>/detail/<%= p.id%>" class="button lnk_view btn btn-default" ><span>Chi tiết</span></a>
+</div>
+</div>
+ 
+<div class="functional-buttons clearfix" style="">
+<% if system_config.is_viewer == 1%>
+<div class="wishlist"><a href="<%= sanpham_path%>/detail/<%= p.id%>" class="addToWishlist wishlistProd_1"><%= p.is_view%> Người đã xem</a></div>
+<%end%>
+<div class="compare">
+	<a onclick="add_compare(<%= p.id%>);" >So sánh</a>
+</div>
+</div>
+
+</div><!-- .product-container> -->
+</li>
+<%end%>
+</ul>
+<!-- Pagination -->
+<div class="content_sortPagiBar clearfix">
+<div class="top-pagination-content clearfix">
+<div class="pagination clearfix" id="pagination"></div>
+<div class="product-count"><%= paginate @products %></div>
+</div>
+</div>
+<!-- /Pagination -->
+</div><!-- #center_column -->
+</div><!-- .row -->
+</div>
+</div>
+  <%= render 'sanpham/footer' %>
+</div>
+  </div>
+</div>
+<script>
+function add_to_cart(id)
+{
+	$.ajax({url:"/sanpham/"+id+"/add_to_cart",success:function(result){
+	    alert("Thêm vào giỏ hàng thành công !");
+	  }});
+}
+function add_compare(pid)
+{
+	$.ajax({url:"/mycompare/"+pid+"/add",success:function(result){
+	    alert("Đã thêm vào mục so sánh !");
+	  }});
+}
+</script>
+<script type="text/javascript">var CUSTOMIZE_TEXTFIELD = 1;var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';var FancyboxboxI18nClose = 'Close'; var comparedProductsIds = '';
+var contentOnly = '';
+</script>
+<%= javascript_include_tag 'sanpham', 'data-turbolinks-track' => true %>
+</body>
+</html>

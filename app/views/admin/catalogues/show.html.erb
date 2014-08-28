@@ -1,0 +1,207 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Internet Dreams</title>
+</head>
+<body> 
+<!-- Start: page-top-outer -->
+<div id="page-top-outer">    
+
+<!-- Start: page-top -->
+<div id="page-top">
+
+	<!-- start logo -->
+	<div id="logo">
+	<a href=""><img src="<%=asset_path('shared/logo.png')%>" width="156" height="40" alt="" /></a>
+	</div>
+	<!-- end logo -->
+ 	<div class="clear"></div>
+
+</div>
+<!-- End: page-top -->
+
+</div>
+<!-- End: page-top-outer -->
+	
+<div class="clear">&nbsp;</div>
+ 
+<!--  start nav-outer-repeat................................................................................................. START -->
+<div class="nav-outer-repeat"> 
+<!--  start nav-outer -->
+<div class="nav-outer"> 
+
+		<!-- start nav-right -->
+		<div id="nav-right">
+		
+			<div class="nav-divider">&nbsp;</div>
+			<div class="showhide-account"><%= current_user.email %></div>
+			<div class="nav-divider">&nbsp;</div>
+			<%= link_to "Đăng xuất", destroy_user_session_path, :method => :delete, :id=>"logout"  %>
+			<div class="clear">&nbsp;</div>
+		
+		</div>
+		<!-- end nav-right -->
+
+
+		<!--  start nav -->
+		<div class="nav">
+		<div class="table">
+		
+		<ul class="select"><li><a href="#nogo"><b>Dashboard</b><!--[if IE 7]><!--></a><!--<![endif]-->
+		<!--[if lte IE 6]><table><tr><td><![endif]-->
+		<div class="select_sub">
+			<ul class="sub">
+				<li><a href="<%=admin_users_path%>">Thống kê người dùng</a></li>
+				<li><a href="orders/">Thống kê đơn hàng</a></li>
+			</ul>
+		</div>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		</li>
+		</ul>
+		
+		<div class="nav-divider">&nbsp;</div>
+		                    
+		<ul class="current"><li><a href="<%=admin_products_path%>"><b>Sản phẩm</b><!--[if IE 7]><!--></a><!--<![endif]-->
+		<!--[if lte IE 6]><table><tr><td><![endif]-->
+		<div class="select_sub show">
+			<ul class="sub">
+				<li><a href="<%=admin_products_path%>">Danh sách sản phẩm</a></li>
+				<li class="sub_show"><a href="<%=new_admin_product_path%>">Thêm sản phẩm mới</a></li>
+			</ul>
+		</div>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		</li>
+		</ul>
+		
+		<div class="nav-divider">&nbsp;</div>
+		
+		<ul class="select"><li><a href="<%=admin_catalogues_path%>"><b>Danh mục</b><!--[if IE 7]><!--></a><!--<![endif]-->
+		<!--[if lte IE 6]><table><tr><td><![endif]-->
+		<div class="select_sub">
+			<ul class="sub">
+				<li><a href="<%=admin_catalogues_path%>">Danh sách danh mục</a></li>
+				<li><a href="<%=new_admin_catalogue_path%>">Thêm danh mục mới</a></li>
+			</ul>
+		</div>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		</li>
+		</ul>
+		
+		<div class="nav-divider">&nbsp;</div>
+		
+		<ul class="select"><li><a href="<%=admin_homes_path%>"><b>Quản trị</b><!--[if IE 7]><!--></a><!--<![endif]-->
+		<!--[if lte IE 6]><table><tr><td><![endif]-->
+		<div class="select_sub">
+			<ul class="sub">
+				<li><a href="<%=admin_homes_path%>">Danh sách người dùng</a></li>
+				<li><a href="<%=new_admin_home_path%>">Tạo tài khoản mới</a></li>
+			</ul>
+		</div>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		</li>
+		</ul>
+		<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+		</div>
+		<!--  start nav -->
+
+</div>
+<div class="clear"></div>
+<!--  start nav-outer -->
+</div>
+<!--  start nav-outer-repeat................................................... END -->
+
+ <div class="clear"></div>
+ 
+<!-- start content-outer ........................................................................................................................START -->
+<div id="content-outer">
+<!-- start content -->
+<div id="content">
+
+	<!--  start page-heading -->
+	<div id="page-heading">
+		<h1>Danh sách danh mục</h1>
+	</div>
+	<!-- end page-heading -->
+
+	<table border="0" width="100%" cellpadding="0" cellspacing="0" id="content-table">
+	<tr>
+		<th rowspan="3" class="sized"><img src="<%=asset_path('shared/side_shadowleft.jpg')%>" width="20" height="300" alt="" /></th>
+		<th class="topleft"></th>
+		<td id="tbl-border-top">&nbsp;</td>
+		<th class="topright"></th>
+		<th rowspan="3" class="sized"><img src="<%=asset_path('shared/side_shadowright.jpg')%>" width="20" height="300" alt="" /></th>
+	</tr>
+	<tr>
+		<td id="tbl-border-left"></td>
+		<td>
+			<%= link_to 'Thêm danh mục', new_admin_product_path %>
+			<div class="clear"></div>
+		<!--  start content-table-inner ...................................................................... START -->
+		<div id="content-table-inner">
+		
+			<!--  start table-content  -->
+			<div id="table-content">
+				<!--  start product-table ..................................................................................... -->
+				<form id="mainform" action="">
+				<table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+				<tr>
+					<th class="table-header-check">STT</th>
+					<th class="table-header-repeat line-left minwidth-1"><a href="">Tên danh mục</a></th>
+					<th class="table-header-repeat line-left"><a href="">Ngày đăng</a></th>
+					<th class="table-header-options line-left"><a href="">Thao tác</a></th>
+				</tr>
+				<% @admin_catalogues.each.with_index  do |admin_cat,index| %>
+				<tr>
+					<td><%=index+1%></td>
+					<td><%= admin_cat.name %></td>
+					<td><%= admin_cat.updated_at %></td>
+					<td class="options-width">
+					<%= link_to '', edit_admin_catalogue_path(admin_cat), :class=>"icon-1 info-tooltip", :title=>"Sửa" %>
+					<%= link_to '', admin_cat, method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Xóa", :class=>"icon-2 info-tooltip" %>
+					</td>
+				</tr>
+				<% end %>
+				</table>
+				<!--  end product-table................................... --> 
+				</form>
+			</div>
+			<!--  end content-table  -->
+			<div class="clear"></div>
+		 
+		</div>
+		<!--  end content-table-inner ............................................END  -->
+		</td>
+		<td id="tbl-border-right"></td>
+	</tr>
+	<tr>
+		<th class="sized bottomleft"></th>
+		<td id="tbl-border-bottom">&nbsp;</td>
+		<th class="sized bottomright"></th>
+	</tr>
+	</table>
+	<div class="clear">&nbsp;</div>
+
+</div>
+<!--  end content -->
+<div class="clear">&nbsp;</div>
+</div>
+<!--  end content-outer........................................................END -->
+
+<div class="clear">&nbsp;</div>
+    
+<!-- start footer -->         
+<div id="footer">
+	<!--  start footer-left -->
+	<div id="footer-left">
+	
+	Admin Skin &copy; Copyright Internet Dreams Ltd. <span id="spanYear"></span> <a href="">www.netdreams.co.uk</a>. All rights reserved.</div>
+	<!--  end footer-left -->
+	<div class="clear">&nbsp;</div>
+</div>
+<!-- end footer -->
+ 
+</body>
+</html>

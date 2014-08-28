@@ -1,0 +1,55 @@
+<h1>Listing admin_stores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>S name</th>
+      <th>S description</th>
+      <th>S address</th>
+      <th>S phone</th>
+      <th>S email</th>
+      <th>S logo</th>
+      <th>S acc skype</th>
+      <th>S fb title</th>
+      <th>S fb name</th>
+      <th>S fb link</th>
+      <th>S fb appid</th>
+      <th>C year</th>
+      <th>C link</th>
+      <th>C trade</th>
+      <th>S acc tw</th>
+      <th>S sitemap</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_stores.each do |admin_store| %>
+      <tr>
+        <td><%= admin_store.s_name %></td>
+        <td><%= admin_store.s_description %></td>
+        <td><%= admin_store.s_address %></td>
+        <td><%= admin_store.s_phone %></td>
+        <td><%= admin_store.s_email %></td>
+        <td><%= admin_store.s_logo %></td>
+        <td><%= admin_store.s_acc_skype %></td>
+        <td><%= admin_store.s_fb_title %></td>
+        <td><%= admin_store.s_fb_name %></td>
+        <td><%= admin_store.s_fb_link %></td>
+        <td><%= admin_store.s_fb_appid %></td>
+        <td><%= admin_store.c_year %></td>
+        <td><%= admin_store.c_link %></td>
+        <td><%= admin_store.c_trade %></td>
+        <td><%= admin_store.s_acc_tw %></td>
+        <td><%= admin_store.s_sitemap %></td>
+        <td><%= link_to 'Show', admin_store %></td>
+        <td><%= link_to 'Edit', edit_admin_store_path(admin_store) %></td>
+        <td><%= link_to 'Destroy', admin_store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Store', new_admin_store_path %>

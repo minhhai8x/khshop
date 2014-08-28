@@ -1,0 +1,191 @@
+<div id="right"> 
+    <div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Cấu hình</h5>
+<ul class="links ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#box-left-forms">Thông tin chung</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other">Hiển thị sản phẩm</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other-home">Trang chủ</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other-cat">Trang danh mục</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other-detail">Trang sản phẩm</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other-link">Google Apps</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other-paypal">Cổng thanh toán Paypal</a></li>
+</ul>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for @admin_systemconfig do |f| %>
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tiền tệ:</label></div>
+  <div class="select"><%= f.select( :currency, options_for_select([["VNĐ",0],["USD",1]], :selected=>f.object.currency))%></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Tỉ giá hối đoái:</label></div>
+  <div class="input"><%= f.text_field :rate, :class=>"medium" %></div>
+</div>
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+<div id="box-left-other" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Sản phẩm bán chạy tối thiểu:</label></div>
+  <div class="input"><%= f.text_field :number_bestbuy, :class=>"small" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Số sản phẩm bán chạy:</label></div>
+  <div class="input"><%= f.text_field :number_bestsell, :class=>"small" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Hiển thị người đã xem:</label></div>
+  <div class="select"><%= f.select( :is_viewer, options_for_select([["Không",0],["Có",1]], :selected=>f.object.is_viewer))%></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Mô tả ngắn sản phẩm:</label></div>
+  <div class="select"><%= f.select( :is_description, options_for_select([["Không",0],["Có",1]], :selected=>f.object.is_description))%></div>
+</div>
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+<!-- end paragraphs -->
+</div>
+<div id="box-left-other-home" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+<div class="field">
+  <div class="label"><label for="input-small">Sản phẩm khuyến mãi:</label></div>
+  <div class="input"><%= f.text_field :number_spec_home, :class=>"small" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Ngẫu nhiên SP khuyến mãi:</label></div>
+  <div class="select"><%= f.select( :spec_home_rand, options_for_select([["Không",0],["Có",1]], :selected=>f.object.spec_home_rand))%></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Sản phẩm mới:</label></div>
+  <div class="input"><%= f.text_field :number_new_home, :class=>"small" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Ngẫu nhiên sản phẩm mới:</label></div>
+  <div class="select"><%= f.select( :new_home_rand, options_for_select([["Không",0],["Có",1]], :selected=>f.object.new_home_rand))%></div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+</div>
+</div>
+<!-- end paragraphs -->
+</div>
+<div id="box-left-other-cat" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+<div class="field">
+  <div class="label"><label for="input-small">Số sản phẩm trên danh mục:</label></div>
+  <div class="input"><%= f.text_field :number_category, :class=>"small" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Sản phẩm khuyến mãi:</label></div>
+  <div class="input"><%= f.text_field :number_spec_cat, :class=>"small" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Ngẫu nhiên SP khuyến mãi:</label></div>
+  <div class="select"><%= f.select( :spec_cat_rand, options_for_select([["Không",0],["Có",1]], :selected=>f.object.spec_cat_rand))%></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Sản phẩm mới:</label></div>
+  <div class="input"><%= f.text_field :number_new_cat, :class=>"small" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Ngẫu nhiên SP mới:</label></div>
+  <div class="select"><%= f.select( :new_cat_rand, options_for_select([["Không",0],["Có",1]], :selected=>f.object.new_cat_rand))%></div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+</div>
+</div>
+<!-- end paragraphs -->
+</div>
+<div id="box-left-other-detail" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+<div class="field">
+  <div class="label"><label for="input-small">Số sản phẩm cùng thể loại:</label></div>
+  <div class="input"><%= f.text_field :number_same_product, :class=>"small" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Ngẫu nhiên:</label></div>
+  <div class="select"><%= f.select( :same_product_rand, options_for_select([["Không",0],["Có",1]], :selected=>f.object.same_product_rand))%></div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+</div>
+</div>
+<!-- end paragraphs -->
+</div>
+<div id="box-left-other-link" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Access Key ID:</label></div>
+  <div class="input"><%= f.text_field :google_access_id, :class=>"medium" %>&nbsp;<i>[Google Storage Access Key ID]</i></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Secret Access Key:</label></div>
+  <div class="input"><%= f.text_field :google_secret_key, :class=>"medium" %>&nbsp;<i>[Google Storage Secret Access Key]</i></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Google Bucket (directory):</label></div>
+  <div class="input"><%= f.text_field :google_bucket, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Google Analytics Code:</label></div>
+  <div class="input"><%= f.text_field :google_analytic_id, :class=>"medium" %>&nbsp;&nbsp;[UA-27015541-7] etc.</div>
+</div>
+
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+<!-- end paragraphs -->
+</div>
+
+<div id="box-left-other-paypal" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tài khoản Paypal:</label></div>
+  <div class="input"><%= f.text_field :paypal_account, :class=>"medium" %>&nbsp;<i>[Email Address]</i></div>
+</div>
+
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+<!-- end paragraphs -->
+</div>
+
+<%end%>
+</div>
+</div>

@@ -1,0 +1,41 @@
+<div class="footer-container">
+    <footer id="footer" class="container">
+      <div class="row">
+        <div id="htmlcontent_footer">
+          <ul class="htmlcontent-home clearfix row">
+            <li class="htmlcontent-item-1 col-xs-4"> <a href="<%= root_path%>" class="item-link" title="">
+              <div class="item-html" style="font-size: 34px; width: 250px;"><%= store_info.s_name%></div>
+              </a> </li>
+          </ul>
+        </div>
+        <section class="footer-block col-xs-12 col-sm-3" id="block_various_links_footer">
+          <h4>Thông tin</h4>
+          <ul class="toggle-footer">
+            <li class="first_item"> <a href="<%= special_product_path%>" title="Sản phẩm khuyến mãi">Sản phẩm khuyến mãi</a> </li>
+            <li class="item"> <a href="<%= new_product_path%>" title="Sản phẩm mới">Sản phẩm mới</a> </li>
+            <li class="item"> <a href="<%= mycompare_path%>" title="So sánh sản phẩm">So sánh sản phẩm</a> </li>
+          </ul>
+        </section>
+        <section class="bottom-footer col-xs-12">
+          <div> &copy; <%= store_info.c_year%> <a class="_blank" href="<%= store_info.c_link%>"><%= store_info.c_trade%></a> </div>
+        </section>
+        <section class="footer-block col-xs-12 col-sm-3">
+          <h4><a rel="nofollow">Tài khoản</a></h4>
+          <div class="block_content toggle-footer">
+            <ul class="bullet">
+              <li><a href="<%= customers_my_order_path%>" title="Đơn hàng của tôi" rel="nofollow">Đơn hàng của tôi</a></li>
+              <li><a href="<%= customers_my_info_path%>" title="Thông tin cá nhân" rel="nofollow">Thông tin cá nhân</a></li>
+            </ul>
+          </div>
+        </section>
+        <section id="social_block" class="footer-block col-xs-12 col-sm-3">
+          <h4>Liên kết</h4>
+          <ul class="toggle-footer">
+            <li class="facebook"> <a target="_blank" href="<%= store_info.s_fb_link%>"> <span>Facebook</span> </a> </li>
+            <li class="twitter"> <a target="_blank" href="https://twitter.com/intent/user?screen_name=<%= store_info.s_acc_tw%>"> <span>Twitter</span> </a> </li>
+            <!--li> <a href="#" title="Sitemap"> Sitemap </a> </li-->
+          </ul>
+        </section>
+      </div>
+    </footer>
+  </div>

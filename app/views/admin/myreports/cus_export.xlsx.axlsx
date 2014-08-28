@@ -1,0 +1,10 @@
+wb = xlsx_package.workbook
+ 
+wb.add_worksheet(:name => @worksheet) do |sheet|
+    sheet.add_row [@worksheet]
+    sheet.add_row [@bv, @v]
+    sheet.add_row [@bb, @b]
+    sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,5], :end_at => [10, 20], :title => @worksheet) do |chart|
+      chart.add_series :data => sheet["B2:B3"], :labels => sheet["A2:A3"],  :colors => ['FF0000', '00FF00']
+    end
+  end

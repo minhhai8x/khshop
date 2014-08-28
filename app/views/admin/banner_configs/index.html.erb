@@ -1,0 +1,35 @@
+<h1>Listing admin_banner_configs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bn speed</th>
+      <th>Bn pause</th>
+      <th>Bn width</th>
+      <th>Bn random</th>
+      <th>Bn max large</th>
+      <th>Bn max small</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_banner_configs.each do |admin_banner_config| %>
+      <tr>
+        <td><%= admin_banner_config.bn_speed %></td>
+        <td><%= admin_banner_config.bn_pause %></td>
+        <td><%= admin_banner_config.bn_width %></td>
+        <td><%= admin_banner_config.bn_random %></td>
+        <td><%= admin_banner_config.bn_max_large %></td>
+        <td><%= admin_banner_config.bn_max_small %></td>
+        <td><%= link_to 'Show', admin_banner_config %></td>
+        <td><%= link_to 'Edit', edit_admin_banner_config_path(admin_banner_config) %></td>
+        <td><%= link_to 'Destroy', admin_banner_config, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Banner config', new_admin_banner_config_path %>

@@ -1,0 +1,96 @@
+<div id="right"> 
+<div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Chỉnh sửa thể loại</h5>
+<ul class="links ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+<li class="ui-state-default ui-corner-top  ui-tabs-selected ui-state-active"><a href="#box-left-forms">Thông tin chung</a></li>
+<li class="ui-state-default ui-corner-top"><a href="#box-left-other">SEO</a></li>
+</ul>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for(@admin_catalogue) do |f| %>
+  <!-- box / messages -->
+ <% if @admin_catalogue.errors.any? %>
+  <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		<div class="messages">
+			<div class="message message-error" id="message-error">
+				<div class="image">
+					<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+				</div>
+				<div class="text">
+					<h6>Có <%= pluralize(@admin_catalogue.errors.count, "lỗi") %> xảy ra !</h6>
+					<% @admin_catalogue.errors.full_messages.each do |message| %>
+				        <span><%= message %></span>
+				    <% end %>
+				</div>
+				<div class="dismiss">
+					<a href="#message-error"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%end%>
+  <!-- end box / messages -->
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tên thể loại:</label></div>
+  <div class="input"><%= f.text_field :name, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="select">Thể loại cha:</label></div>
+  <div class="select">
+  	<%= f.select :parentid,@cat.collect{ |c| [c.name, c.id]},{:include_blank  => '--- Chọn thể loại ---' },:class=>"styledselect_form_1"%>
+  </div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Sắp xếp:</label></div>
+  <div class="input"><%= f.text_field :sort_order, :class=>"tiny" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Mô tả:</label></div>
+  <div style="height: 100px;" class="textarea textarea-editor"><%= f.text_area :description, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Tình trạng:</label></div>
+  <div class="select">
+    <%= f.select( :status, options_for_select([["Chưa kích hoạt",0],["Đã kích hoạt",1]], :selected=>f.object.status))%>                
+  </div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+<div id="box-left-other" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<!-- paragraphs -->
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Meta keyword:</label></div>
+  <div class="input"><%= f.text_field :meta_keyword, :class=>"medium" %>&nbsp;<i>Các từ khóa cách nhau bởi dấu gạch ngang (-) và &nbsp;không có khoảng trắng !</i></div>
+</div>
+
+
+<div class="field">
+  <div class="label"><label for="input-small">Meta description:</label></div>
+  <div style="height: 100px;" class="textarea textarea-editor"><%= f.text_area :meta_description, :class=>"medium" %></div>
+</div>
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+<!-- end paragraphs -->
+</div>
+<%end%>
+</div>
+</div>

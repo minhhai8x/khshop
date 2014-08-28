@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>KH Shop</title>
+<meta name="generator" content="haiwebcc"/>
+<meta name="robots" content="index,follow"/>
+<meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<%= stylesheet_link_tag    'sanpham', media: 'all', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+<%=  javascript_include_tag  :application  %>
+</head>
+<body id="order" class="order hide-left-column hide-right-column lang_en">	
+<div id="page">
+  <div class="main-wrap-center">
+<div class="main-wrap">
+  <%= render 'sanpham/header' %>
+  <div class="columns-container">
+<div class="container" id="columns">
+
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+<a title="Trang chủ" href="<%= root_path%>" class="home"><i class="icon-home"></i></a>
+<span class="navigation-pipe">&gt;</span>
+<span class="navigation_page">Đơn hàng của tôi</span>
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+<div id="center_column" class="center_column col-xs-12 col-sm-12">
+	<!----my-order--content---->
+	<div class="table_block table-responsive" id="order-detail-content">
+<table class="table table-bordered" id="cart_summary">
+<thead>
+<tr>
+<th class="cart_product first_item">STT</th>
+<th class="cart_description item">Ngày mua hàng</th>
+<th class="cart_unit item">Tổng tiền</th>
+</tr>
+</thead>
+<tfoot>
+
+<tr class="cart_total_price">
+<td class="total_price_container text-right" colspan="2"><span>Tổng cộng</span></td>
+<td id="total_price_container" class="price" colspan="1"><span id="total_price"><%= number_to_currency(@sum)%></span></td>
+</tr>
+</tfoot>
+<tbody>
+<% @myorders.each.with_index do |v,i| %>																				
+<tr class="cart_item last_item first_item address_0 odd" >
+<td class="cart_product"><%= i+1%></td>
+<td class="cart_description"><p class="product-name"><a><%= v.created_at%></a></p></td>
+<td class="cart_unit"  style="text-align: right;"><span class="price"><%= number_to_currency(v.cs_sum)%></span></td>
+</tr>
+<%end%>
+</tbody>
+</table>
+</div>
+	<!---//-my-order--content-->
+</div>
+</div>
+
+</div>
+  </div>
+  <%= render 'sanpham/footer' %>
+</div>
+  </div>
+</div>
+<script type="text/javascript">
+var CUSTOMIZE_TEXTFIELD = 1;
+var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';
+var FancyboxboxI18nClose = 'Close';
+var contentOnly = false;
+var static_token = '';
+var baseDir = '';
+var baseUri = '';
+var blocksearch_type = 'top';
+var quantityAvailable = 1000000;
+var homeslider_loop = '1';
+var homeslider_pause = '5000';
+var homeslider_speed = '500';
+var homeslider_width = '1168';
+
+var img_dir = '';
+var quickView = true;
+var roundMode = 2;
+var search_url = '';
+</script>
+<%= javascript_include_tag 'sanpham', 'data-turbolinks-track' => true %>
+<script>
+	$("#btnoLogin").click(function(){
+		$("#imgloading2").show();
+		var email = $("#logemail").val();
+		var passwd = $("#logpasswd").val();
+		var hashData = new Object();
+		hashData["email"] = email;
+		hashData["passwd"] = passwd;
+		$.ajax({
+		url:"/customers/check_login",
+		data: { 'hdata' : hashData},
+		success:function(result){
+			$("#imgloading2").hide();
+			if(parseInt(result) == 1)
+			{
+				window.location.href = "/";
+			}else{
+				alert("Thông tin đăng nhập không chính xác !");
+			} 
+	  }});
+	});
+	function acc_email()
+	{
+		$("#imgloading").show();
+		var cus_email = $("#txtEmail").val();
+		$.ajax({
+		url:"/customers/new",
+		data: { 'cus_email' : cus_email},
+		type: "GET",
+		dataType: 'html',
+		success:function(result){
+			$(".colsm6register").hide();
+			$("#create_account_error").html("Tạo tài khoản thành công ! Vui lòng kiểm tra hộp thư "+ cus_email + " để lấy mật khẩu đăng nhập.");
+			$(".colsm6registersuccess").show();
+			 
+	    //location.reload();
+	    //alert("Tạo tài khoản thành công");
+	    
+	  }});
+	}
+</script>
+</body>
+</html>

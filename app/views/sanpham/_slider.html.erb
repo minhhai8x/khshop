@@ -1,0 +1,13 @@
+<div id="homepage-slider">
+    <ul id="homeslider">
+    <% @banners_l.each do |bn| %>
+      <li class="homeslider-container"> <a href="<%= bn.lg_link%>" title="<%= bn.lg_title%>"> <img src="<%= bn.lg_imageurl%>" width="1168" height="480" alt="<%= bn.lg_title%>"/> </a>
+        <div class="homeslider-description">
+          <h3><%= bn.lg_title%></h3>
+          <p><%= bn.lg_description%></p>
+          <p><button class="btn btn-default" type="button"><%= bn.lg_btntitle%></button></p>
+        </div>
+      </li>
+     <%end%>
+    </ul>
+  </div>

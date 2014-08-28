@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>KH Shop</title>
+<meta name="generator" content="haiwebcc"/>
+<meta name="robots" content="index,follow"/>
+<meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<%= stylesheet_link_tag    'sanpham', media: 'all', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+<%=  javascript_include_tag  :application  %>
+</head>
+<body id="index" class="index hide-left-column hide-right-column lang_en">
+<div id="page">
+  <div id="toTop" style="display: block;"></div>
+  <div class="main-wrap-center">
+    <div class="main-wrap">
+      <%= render 'sanpham/header' %>
+      <div class="columns-container">
+        <div id="columns" class="container">
+          <div class="row">
+            <div id="center_column" class="center_column col-xs-12 col-sm-12">
+              <ul id="home-page-tabs" class="nav nav-tabs clearfix">
+                <li class="active"><a data-toggle="tab" href="#blocknewproducts" class="blocknewproducts">Sản phẩm mới</a></li>
+              </ul>
+              <div class="tab-content">
+                <ul id="blocknewproducts" class="product_list grid row blocknewproducts tab-pane active">
+                <% @new_products.each do |sp|%>
+                  <li class="ajax_block_product col-xs-12 col-sm-4 col-md-3 first-item-of-mobile-line">
+                    <div class="product-container" itemscope>
+                      <div class="left-block">
+                        <div class="product-image-container"> 
+                        	<a class="product_img_link" href="<%= sanpham_path%>/detail/<%= sp.id%>" title="<%= sp.name%>" >
+                        		<img class="img-responsive" src="<%= sp.image%>" alt="<%= sp.name%>" title="<%= sp.name%>" />
+                        	 </a> 
+                          <!--span class="new-box"> <span class="new-label">New</span> </span> <span class="sale-box"> <span class="sale-label">Sale!</span> </span--> </div>
+                      </div>
+                      <div class="right-block">
+                        <h5> <a class="product-name" href="<%= sanpham_path%>/detail/<%= sp.id%>" title="<%= sp.name%>" ><%= sp.name.to_s.split(" ").first(6).join(" ")%>...</a> </h5>
+                        <div class="comments_note" ><span class="nb-comments"><% if system_config.is_viewer == 1%> <%= sp.is_view%> Người đã xem<%end%></span></div>
+                        <% if system_config.is_description == 1%>
+                        <p class="grid-desc"><%= sp.description.to_s.split(" ").first(20).join(" ")%> ...</p>
+                        <%end%>
+                        <div class="content_price"> 
+                        	<% if sp.discount?%>
+                        	<span class="price product-price"><%= number_to_currency(sp.price*((100-sp.discount))/100)%></span>
+                        	<span class="price-percent-reduction">-<%= sp.discount %>%</span>
+                        	<span class="old-price product-price"><%= number_to_currency(sp.price)%></span>
+                        	<%else%>
+                        	<span class="price product-price"><%= number_to_currency(sp.price)%></span>
+                        	<%end%>
+                        </div>
+                          
+                        <div class="button-container"> 
+                        	<a class="button ajax_add_to_cart_button btn btn-default" rel="nofollow" title="Thêm vào giỏ hàng" data-id-product="1"> 
+                        		<span><div onclick="add_to_cart(<%= sp.id%>)" class="mcart">&nbsp;</div></span> </a>
+                        	<a class="button lnk_view btn btn-default" href="<%= sanpham_path%>/detail/<%= sp.id%>" title="Xem chi tiết"> <span>Chi tiết</span> </a> 
+                        </div>
+                        </div>
+                    </div>
+                  </li>
+                 <%end%>
+                </ul>
+              </div>
+              <%= render 'sanpham/store_information' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= render 'sanpham/footer' %>
+    </div>
+  </div>
+</div>
+<script>
+function add_to_cart(id)
+{
+	$.ajax({url:"/sanpham/"+id+"/add_to_cart",success:function(result){
+	    alert("Thêm vào giỏ hàng thành công !");
+	  }});
+}
+</script>
+<script type="text/javascript">
+var CUSTOMIZE_TEXTFIELD = 1;
+var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';
+var FancyboxboxI18nClose = 'Close';
+var contentOnly = '';
+var baseDir = '';
+var baseUri = '';
+var blocksearch_type = 'top';
+
+var homeslider_loop = '1';
+var homeslider_pause = '5000';
+var homeslider_speed = '500';
+var homeslider_width = '1168';
+var  static_token  = '';
+var img_dir = '';
+var quickView = true;
+var roundMode = 2;
+var search_url = '';
+</script>
+<%= javascript_include_tag 'sanpham', 'data-turbolinks-track' => true %>
+</body>
+</html>

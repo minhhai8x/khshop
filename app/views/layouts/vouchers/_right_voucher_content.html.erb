@@ -1,0 +1,69 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Danh sách Voucher</h5>
+      </div>
+      <!-- end box / title -->
+      <div class="table">
+      	<div class="action">
+		<div class="button">
+			<%= link_to "Thêm mới Voucher",new_admin_voucher_path,:class=>"ui-button ui-widget ui-state ui-corner-all"%>
+		</div>
+	  </div>
+	  <br clear="all" /><br clear="all" />
+        <form action="" method="post">
+          <table>
+            <thead>
+              <tr>
+              	<th class="selected">STT</th>
+                <th>Code</th>
+                <th>Gửi từ</th>
+                <th>Gửi đến</th>
+                <th>Số tiền</th>
+                <th>Ngày</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @admin_vouchers.each.with_index  do |vc,index| %>	
+              <tr>
+              	<td class="selected"><%=index+1%></td>
+                <td class="price"><%= vc.v_code %></td>
+                <td class="price"><%= vc.from_name %></td>
+                <td class="price"><%= vc.to_name %></td>
+                <td class="price"><%= vc.v_amount %></td>
+                <td class="price"><%= vc.created_at %></td>
+                <td class="price"><% if vc.v_status == 1 %>Kích hoạt<%else%>Khóa<%end%></td>
+                <td class="category">
+                <div class="btncontrol">
+                	<%= link_to image_tag(asset_path('admin/pencil.png')), edit_admin_voucher_path(vc), :title=>"Sửa"%>
+                    <div style="width:10px;"></div>
+                    <%= link_to image_tag(asset_path('admin/remove.png')), vc, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa ?' }, :title=>"Xóa" %>
+                    <div style="width:10px; height: 25px;"></div>
+                    <a onclick="send_email(<%= vc.id%>);" ><%= image_tag(asset_path('admin/email.png'))%></a>
+                </div>
+                </td>
+              </tr>
+             <%end%> 
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <!-- end table --> 
+</div>
+<script>
+	function send_email(id)
+	{
+		$.ajax({
+				url:"vouchers/send_email",
+				data: { 'vc_id' : id},
+				type: "GET",
+				success:function(result){
+					alert("Gửi Email thành công !");
+			  }});	
+	}
+</script>

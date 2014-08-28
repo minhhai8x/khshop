@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>V code:</strong>
+  <%= @admin_voucher.v_code %>
+</p>
+
+<p>
+  <strong>From name:</strong>
+  <%= @admin_voucher.from_name %>
+</p>
+
+<p>
+  <strong>From email:</strong>
+  <%= @admin_voucher.from_email %>
+</p>
+
+<p>
+  <strong>To name:</strong>
+  <%= @admin_voucher.to_name %>
+</p>
+
+<p>
+  <strong>To email:</strong>
+  <%= @admin_voucher.to_email %>
+</p>
+
+<p>
+  <strong>V messsage:</strong>
+  <%= @admin_voucher.v_messsage %>
+</p>
+
+<p>
+  <strong>V amount:</strong>
+  <%= @admin_voucher.v_amount %>
+</p>
+
+<p>
+  <strong>V status:</strong>
+  <%= @admin_voucher.v_status %>
+</p>
+
+<%= link_to 'Edit', edit_admin_voucher_path(@admin_voucher) %> |
+<%= link_to 'Back', admin_vouchers_path %>

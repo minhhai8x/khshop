@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Br reason:</strong>
+  <%= @admin_backup_restore.br_reason %>
+</p>
+
+<p>
+  <strong>Br userid:</strong>
+  <%= @admin_backup_restore.br_userid %>
+</p>
+
+<p>
+  <strong>Br note:</strong>
+  <%= @admin_backup_restore.br_note %>
+</p>
+
+<p>
+  <strong>Br status:</strong>
+  <%= @admin_backup_restore.br_status %>
+</p>
+
+<%= link_to 'Edit', edit_admin_backup_restore_path(@admin_backup_restore) %> |
+<%= link_to 'Back', admin_backup_restores_path %>

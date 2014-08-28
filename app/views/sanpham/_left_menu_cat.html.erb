@@ -1,0 +1,72 @@
+<div class="column col-xs-12 col-sm-3" id="left_column">
+<!-- MODULE Block new products -->
+<div class="block products_block" id="new-products_block_right">
+<h4 class="title_block"><a title="Sản phẩm mới" href="<%= new_product_path%>/<%= @category.id%>">Sản phẩm mới</a></h4>
+<div class="block_content products-block" style="">
+<ul class="products">
+<% @products_new.each do |np|%>
+<li class="clearfix">
+<a title="<%= np.name%>" href="<%= sanpham_path%>/detail/<%= np.id%>" class="products-block-image"><img alt="<%= np.name%>" src="<%= np.image%>" class="replace-2x img-thumb"></a>
+<div class="product-content">
+<h5>
+<a title="<%= np.name%>" href="<%= sanpham_path%>/detail/<%= np.id%>" class="product-name"><%= np.name%></a>
+</h5>
+<% if system_config.is_description == 1%>
+<p class="product-description"><%= np.description.to_s.split(" ").first(8).join(" ")%>...</p>
+<%end%>
+<div class="price-box">
+<% if np.discount?%>
+<span class="price special-price"><%= number_to_currency(np.price*((100-np.discount))/100)%></span><br />
+<span class="price-percent-reduction">- <%= np.discount%> %</span>
+<span class="old-price"><%= number_to_currency(np.price)%></span>
+<%else%>
+<span class="special-price"><%= number_to_currency(np.price)%></span>
+<%end%>
+</div>
+</div>
+</li>
+<%end%>
+</ul>
+<div>
+<a class="btn btn-default button button-small" title="Xem tất cả sản phẩm mới" href="<%= new_product_path%>/<%= @category.id%>"><span>Sản phẩm mới<i class="icon-chevron-right right"></i></span></a>
+</div>
+</div>
+</div>
+<!-- /MODULE Block new products -->
+<!-- MODULE Block specials -->
+<div class="block" id="special_block_right">
+<p class="title_block"><a title="Specials" href="<%= special_product_path%>/<%= @category.id%>">Sản phẩm khuyến mãi</a></p>
+<div class="block_content products-block" style="">
+<ul>
+<% @products_spec.each do |sp|%>
+<li class="clearfix">
+<a title="<%= sp.name%>" href="<%= sanpham_path%>/detail/<%= sp.id%>" class="products-block-image"><img alt="<%= sp.name%>" src="<%= sp.image%>" class="replace-2x img-thumb"></a>
+<div class="product-content">
+<h5>
+<a title="<%= sp.name%>" href="<%= sanpham_path%>/detail/<%= sp.id%>" class="product-name"><%= sp.name%></a>
+</h5>
+<% if system_config.is_description == 1%>
+<p class="product-description"><%= sp.description.to_s.split(" ").first(8).join(" ")%>...</p>
+<%end%>
+<div class="price-box">
+<% if sp.discount?%>
+<span class="price special-price"><%= number_to_currency(sp.price*((100-sp.discount))/100)%></span><br />
+<span class="price-percent-reduction">- <%= sp.discount%> %</span>
+<span class="old-price"><%= number_to_currency(sp.price)%></span>
+<%else%>
+<span class="special-price"><%= number_to_currency(sp.price)%></span>
+<%end%>
+</div>
+</div>
+</li>
+<%end%>
+</ul>
+<div>
+<a title="All specials" href="<%= special_product_path%>/<%= @category.id%>" class="btn btn-default button button-small">
+<span>Sản phẩm khuyến mãi<i class="icon-chevron-right right"></i></span>
+</a>
+</div>
+</div>
+</div>
+<!-- /MODULE Block specials -->
+</div>

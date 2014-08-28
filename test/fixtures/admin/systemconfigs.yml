@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: MyString
+  backend_lang: MyString
+  frontend_lang: MyString
+  currency: MyString
+  number_bestbuy: 1
+  number_bestsell: 1
+  number_category: 1
+  is_viewer: 1
+  is_description: 1
+  google_access_id: MyString
+  google_secret_key: MyString
+  google_bucket: MyString
+  google_analytic_id: MyString
+
+two:
+  country: MyString
+  backend_lang: MyString
+  frontend_lang: MyString
+  currency: MyString
+  number_bestbuy: 1
+  number_bestsell: 1
+  number_category: 1
+  is_viewer: 1
+  is_description: 1
+  google_access_id: MyString
+  google_secret_key: MyString
+  google_bucket: MyString
+  google_analytic_id: MyString

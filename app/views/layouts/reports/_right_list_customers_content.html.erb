@@ -1,0 +1,35 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Danh sách khách hàng</h5>
+      </div>
+      <!-- end box / title -->
+      <div class="table">
+        <form action="" method="post">
+          <table>
+            <thead>
+              <tr>
+              	<th class="selected">STT</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Điểm thưởng</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @list_customers.each.with_index  do |cus,index| %>	
+              <tr>
+              	<td class="selected"><%=index+1%></td>
+                <td style="width: 10%;"><%= cus.cus_email%></td>
+                <td class="price"><%= cus.cus_address%></td>
+                <td class="price"><%= cus.cus_points%></td>
+              </tr>
+             <%end%> 
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <!-- end table --> 
+</div>

@@ -1,0 +1,73 @@
+<div id="right"> 
+<div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Cấu hình Slide và Banner</h5>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for(@admin_banner_config) do |f| %>
+  <!-- box / messages -->
+ <% if @admin_banner_config.errors.any? %>
+  <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		<div class="messages">
+			<div class="message message-error" id="message-error">
+				<div class="image">
+					<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+				</div>
+				<div class="text">
+					<h6>Có <%= pluralize(@admin_banner_config.errors.count, "lỗi") %> xảy ra !</h6>
+					<% @admin_banner_config.errors.full_messages.each do |message| %>
+				        <span><%= message %></span>
+				    <% end %>
+				</div>
+				<div class="dismiss">
+					<a href="#message-error"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%end%>
+  <!-- end box / messages -->
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tốc độ:</label></div>
+  <div class="input"><%= f.text_field :bn_speed, :class=>"tiny" %>&nbsp;<i>[Tốc độ của Slide,mặc định là 500 ms(mili giây)]</i></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Thời gian dừng:</label></div>
+  <div class="input"><%= f.text_field :bn_pause, :class=>"tiny" %>&nbsp;<i>[Thời gian dừng giữa các Slide, mặc định là 5000 ms]</i></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Độ rộng của Slide:</label></div>
+  <div class="input"><%= f.text_field :bn_width, :class=>"tiny" %>&nbsp;<i>[Mặc định là 1168 pixel]</i></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="select">Sắp xếp ngẫu nhiên:</label></div>
+  <div class="select">
+    <%= f.select( :bn_random, options_for_select([["Không",0],["Có",1]], :selected=>f.object.bn_random))%>                
+  </div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Số Slide tối đa:</label></div>
+  <div class="input"><%= f.text_field :bn_max_large, :class=>"tiny" %>&nbsp;<i>[Mặc định là 3]</div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Số Banner tối đa:</label></div>
+  <div class="input"><%= f.text_field :bn_max_small, :class=>"tiny" %>&nbsp;<i>[Mặc định là 6]</div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+
+<%end%>
+</div>
+</div>

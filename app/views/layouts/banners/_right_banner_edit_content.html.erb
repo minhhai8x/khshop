@@ -1,0 +1,83 @@
+<div id="right"> 
+<div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Chỉnh sửa banner</h5>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for(@admin_banner) do |f| %>
+  <!-- box / messages -->
+ <% if @admin_banner.errors.any? %>
+  <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		<div class="messages">
+			<div class="message message-error" id="message-error">
+				<div class="image">
+					<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+				</div>
+				<div class="text">
+					<h6>Có <%= pluralize(@admin_banner.errors.count, "lỗi") %> xảy ra !</h6>
+					<% @admin_banner.errors.full_messages.each do |message| %>
+				        <span><%= message %></span>
+				    <% end %>
+				</div>
+				<div class="dismiss">
+					<a href="#message-error"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%end%>
+  <!-- end box / messages -->
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tiêu đề:</label></div>
+  <div class="input"><%= f.text_field :lg_title, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="select">Mô tả:</label></div>
+  <div style="height: 110px; overflow: scroll;" class="textarea textarea-editor"><%= f.text_area :lg_description, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Hình ảnh:</label></div>
+  <div class="input input-file"><%= f.file_field :lg_imageurl, :class=>"file"%></div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Loại banner:</label></div>
+  <div class="select">
+    <%= f.select( :lg_type, options_for_select([["Banner lớn",0],["Banner nhỏ",1]], :selected=>f.object.lg_type))%>                
+  </div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Sắp xếp:</label></div>
+  <div class="input"><%= f.text_field :bn_sortby, :class=>"tiny" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Nội dung nút nhấn:</label></div>
+  <div class="input"><%= f.text_field :lg_btntitle, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="input-small">Đường dẫn:</label></div>
+  <div class="input"><%= f.text_field :lg_link, :class=>"medium" %></div>
+</div>
+<div class="field">
+  <div class="label"><label for="select">Tình trạng:</label></div>
+  <div class="select">
+    <%= f.select( :lg_status, options_for_select([["Chưa kích hoạt",0],["Đã kích hoạt",1]], :selected=>f.object.lg_status))%>                
+  </div>
+</div>
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+
+<%end%>
+</div>
+</div>

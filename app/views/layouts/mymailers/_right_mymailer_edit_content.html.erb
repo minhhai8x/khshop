@@ -1,0 +1,76 @@
+<div id="right"> 
+<div class="box  box-padding ui-tabs ui-widget ui-widget-content ui-corner-all" id="box-left-tabs">
+<!-- box / title -->
+<div class="title">
+<h5 align="center" style="float: none;">Cấu hình email</h5>
+</div>
+<!-- end box / title -->
+<!-- box / form -->
+  <%= form_for(@admin_mymailer) do |f| %>
+  <!-- box / messages -->
+ <% if @admin_mymailer.errors.any? %>
+  <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		<div class="messages">
+			<div class="message message-error" id="message-error">
+				<div class="image">
+					<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+				</div>
+				<div class="text">
+					<h6>Có <%= pluralize(@admin_mymailer.errors.count, "lỗi") %> xảy ra !</h6>
+					<% @admin_mymailer.errors.full_messages.each do |message| %>
+				        <span><%= message %></span>
+				    <% end %>
+				</div>
+				<div class="dismiss">
+					<a href="#message-error"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%end%>
+  <!-- end box / messages -->
+  
+<div id="box-left-forms">
+<div class="form">
+<div class="fields">
+	
+<div class="field">
+  <div class="label"><label for="input-small">Tên (email) người gửi:</label></div>
+  <div class="input"><%= f.text_field :e_title, :class=>"small" %>&nbsp;<i>[cskh@gmail.com hoặc CSKH_KHShop. Lưu ý: Không có khoảng trắng ! ]</i></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Địa chỉ host:</label></div>
+  <div class="input"><%= f.text_field :e_address, :class=>"medium" %>&nbsp;<i>[smtp.sendgrid.net]</i></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Port:</label></div>
+  <div class="input"><%= f.text_field :e_port, :class=>"tiny" %>&nbsp;<i>[587]</i></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Domain:</label></div>
+  <div class="input"><%= f.text_field :e_domain, :class=>"medium" %>&nbsp;<i>[heroku.com]</i></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Username:</label></div>
+  <div class="input"><%= f.text_field :e_username, :class=>"medium" %></div>
+</div>
+
+<div class="field">
+  <div class="label"><label for="input-small">Password:</label></div>
+  <div class="input"><%= f.text_field :e_password, :class=>"medium" %></div>
+</div>
+
+
+<div class="buttons"><%= f.submit "Lưu lại",:class=>"form-submit" %></div>
+  </div>
+</div>
+
+<!-- end box / form -->
+</div>
+<%end%>
+</div>
+</div>

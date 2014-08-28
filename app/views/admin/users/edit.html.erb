@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KHShop Admin</title>
+<%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+</head>
+<body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#date-picker").datepicker();
+        $("#box-tabs, #box-left-tabs").tabs();
+    });
+</script>
+<!-- header --> 
+<%= render 'layouts/header' %>
+<!-- end header --> 
+<!-- content -->
+<div id="content"> 
+  <!-- content / left --> 
+	<%= render 'layouts/left_content' %>   
+  <!-- end content / left --> 
+  <!-- content / right -->
+  	<%= render 'layouts/users/right_user_edit_content' %>
+  <!-- end content / right --> 
+</div>
+<!-- end content --> 
+<!-- footer --> 
+<%= render 'layouts/footer' %> 
+<!-- end footert -->
+</body>
+</html>

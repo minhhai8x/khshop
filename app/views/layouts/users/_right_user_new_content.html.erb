@@ -1,0 +1,82 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Tạo mới tài khoản người dùng</h5>
+      </div>
+      <!-- end box / title -->
+      <!-- box / form -->
+      <%= form_for(@admin_user) do |f| %>
+      <!-- box / messages -->
+      <% if @admin_user.errors.any? %>
+      <div id="box-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+			<div class="messages">
+				<div class="message message-error" id="message-error">
+					<div class="image">
+						<img height="32" alt="Error" src="<%=asset_path('admin/error.png')%>">
+					</div>
+					<div class="text">
+						<h6>Có <%= pluralize(@admin_user.errors.count, "lỗi") %> xảy ra !</h6>
+						<% @admin_user.errors.full_messages.each do |message| %>
+					        <span><%= message %></span>
+					    <% end %>
+					</div>
+					<div class="dismiss">
+						<a href="#message-error"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%>
+	  <!-- end box / messages -->	
+        <div class="form">
+          <div class="fields">
+            <div class="field">
+              <div class="label"><label for="input-small">Email:</label></div>
+              <div class="input"><%= f.text_field :email, :class=>"medium" %></div>
+            </div>
+            
+            <div class="field">
+              <div class="label"><label for="input-small">Password:</label></div>
+              <div class="input"><%= f.password_field :password, :class=>"medium" %></div>
+            </div>
+            
+            <div class="field">
+              <div class="label"><label for="input-small">Địa chỉ:</label></div>
+              <div class="input"><%= f.text_field :address, :class=>"medium" %></div>
+            </div>
+            
+            <div class="field">
+              <div class="label"><label for="input-small">Điện thoại</label></div>
+              <div class="input"><%= f.text_field :phone, :class=>"medium" %></div>
+            </div>
+            
+            <div class="field">
+              <div class="label"><label for="select">Tình trạng:</label></div>
+              <div class="select">
+                <%= f.select( :status, options_for_select([["Chưa kích hoạt",0],["Đã kích hoạt",1]], :selected=>f.object.status))%>                
+              </div>
+            </div>
+            <div class="field">
+              <div class="label"><label for="select">Phân quyền:</label></div>
+              <div class="select">
+              	<% if current_user.role == "superadmin"%>
+                <%= f.select( :role, options_for_select([["Admin","superadmin"],["Manager Group","manager"],["Content Group","content"],["Sales Group","sale"]], :selected=>f.object.role))%>
+                <%else%>
+                <%= f.select( :role, options_for_select([["Manager Group","manager"],["Content Group","content"],["Sales Group","sale"]], :selected=>f.object.role))%>
+                <%end%>                
+              </div>
+            </div>
+            <div class="buttons">
+              <%= f.submit "Lưu lại",:class=>"form-submit" %>
+              <input type="reset" value="Reset" name="reset">
+            </div>
+            
+          </div>
+        </div>
+      <%end%>
+      <!-- end box / form -->
+    </div>
+    <!-- end table --> 
+</div>

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>KH Shop</title>
+<meta name="generator" content="haiwebcc"/>
+<meta name="robots" content="index,follow"/>
+<meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<%= stylesheet_link_tag    'sanpham', media: 'all', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+</head>
+<body id="order" class="order hide-left-column hide-right-column lang_en">	
+<div id="page">
+  <div class="main-wrap-center">
+<div class="main-wrap">
+  <%= render 'sanpham/header' %>
+  <div class="columns-container">
+<div class="container" id="columns">
+
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+<a title="Trang chủ" href="<%= root_path%>" class="home"><i class="icon-home"></i></a>
+<span class="navigation-pipe">&gt;</span>
+<span class="navigation_page">Đăng ký / Đăng nhập</span>
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+	<!--------Login--------->
+<div class="col-xs-12 col-sm-6">
+	<div id="login_form" class="box">
+		<h3 class="page-subheading">Bạn đã có tài khoản chưa ?</h3>
+		<div class="form_content clearfix">
+			<div class="form-group"><label for="email">Email</label>
+			<input type="text" class="is_required validate account_input form-control" id="logemail" name="email" value="">
+			</div>
+			<div class="form-group"><label for="passwd">Password</label>
+				<span><input type="password" class="is_required validate account_input form-control" id="logpasswd" name="passwd" value=""></span>
+			</div>
+			
+			<p class="submit">
+				<button type="button" id="btnoLogin" name="btnoLogin" class="button btn btn-default button-medium">
+					<span><i class="icon-lock left"></i>Đăng nhập</span>
+				</button>&nbsp;&nbsp;&nbsp;<img src="/assets/index/zoomloader.gif" style="display: none;" id="imgloading2">
+			</p>
+		</div>
+	</div>
+</div>
+<!------//--Login------->
+<!--------Sign_up------->
+<div style="display:none" class="col-xs-12 col-sm-6 colsm6registersuccess">
+	<div class="alert alert-success" id="create_account_error"></div>
+</div>
+<div class="col-xs-12 col-sm-6 colsm6register">
+<div class="box" id="create-account_form">
+	<h3 class="page-subheading">Tạo mới tài khoản ?</h3>
+	<div class="form_content clearfix">
+		<p>Bạn chỉ cần nhập Email sau đó chúng tôi sẽ tạo tài khoản cho bạn</p>
+		
+		
+		<div class="form-group">
+			<label for="email_create">Địa chỉ Email</label>
+			<input type="text" class="is_required validate account_input form-control" id="txtEmail" name="txtEmail" value="">
+		</div>
+		<div class="submit">
+			<button class="btn btn-default button button-medium exclusive" type="button" id="btnCreate" name="btnCreate" onclick="acc_email();">
+				<span><i class="icon-user left"></i>Tạo tài khoản</span>
+			</button>&nbsp;&nbsp;&nbsp;<img src="/assets/index/zoomloader.gif" style="display: none;" id="imgloading">
+		</div>
+	</div>
+</div>
+</div>
+
+<!------//--Sign_up----->
+</div>
+</div>
+  </div>
+  <%= render 'sanpham/footer' %>
+</div>
+  </div>
+</div>
+<script type="text/javascript">
+var CUSTOMIZE_TEXTFIELD = 1;
+var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';
+var FancyboxboxI18nClose = 'Close';
+var contentOnly = false;
+var static_token = '';
+var baseDir = '';
+var baseUri = '';
+var blocksearch_type = 'top';
+var quantityAvailable = 1000000;
+var homeslider_loop = '1';
+var homeslider_pause = '5000';
+var homeslider_speed = '500';
+var homeslider_width = '1168';
+
+var img_dir = '';
+var quickView = true;
+var roundMode = 2;
+var search_url = '';
+</script>
+<%= javascript_include_tag 'sanpham_detail', 'data-turbolinks-track' => true %>
+<script>
+	$("#btnoLogin").click(function(){
+		$("#imgloading2").show();
+		var email = $("#logemail").val();
+		var passwd = $("#logpasswd").val();
+		var hashData = new Object();
+		hashData["email"] = email;
+		hashData["passwd"] = passwd;
+		$.ajax({
+		url:"/customers/check_login",
+		data: { 'hdata' : hashData},
+		success:function(result){
+			$("#imgloading2").hide();
+			if(parseInt(result) == 1)
+			{
+				window.location.href = "/";
+			}else{
+				alert("Thông tin đăng nhập không chính xác !");
+			} 
+	  }});
+	});
+	function acc_email()
+	{
+		$("#imgloading").show();
+		var cus_email = $("#txtEmail").val();
+		if (cus_email)
+		{
+			if(validateEmail(cus_email))
+			{
+				$.ajax({
+				url:"/customers/new",
+				data: { 'cus_email' : cus_email},
+				type: "GET",
+				dataType: 'html',
+				success:function(result){
+					$(".colsm6register").hide();
+					$("#create_account_error").html("Tạo tài khoản thành công ! Vui lòng kiểm tra hộp thư "+ cus_email + " để lấy mật khẩu đăng nhập.");
+					$(".colsm6registersuccess").show();
+			  }});	
+			}else{
+				alert("Vui lòng nhập địa chỉ Email hợp lệ !");
+				$("#imgloading").hide();
+			}
+			
+		}else{
+			alert("Vui lòng nhập địa chỉ Email !");
+			$("#imgloading").hide();
+		}
+		
+	}
+	function validateEmail(email) { 
+	    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	} 
+</script>
+</body>
+</html>

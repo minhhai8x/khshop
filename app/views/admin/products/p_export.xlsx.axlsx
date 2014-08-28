@@ -1,0 +1,9 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(:name => @worksheet) do |sheet|
+    sheet.add_row [@title_table]
+    @chartData.each { |item| sheet.add_row [item.as_json['name'].to_s, item.as_json['num'].to_i] }
+    sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,@chartData.count], :end_at => [10, 20], :title => @title_pie) do |chart|
+      chart.add_series :data => sheet["B2:B@chartData.count"], :labels => sheet["A2:A@chartData.count"],  :colors => ['FF0000', '00FF00', '0000FF']
+    end
+end
+

@@ -1,0 +1,2 @@
+module NewProductHelper
+end

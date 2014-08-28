@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>KH Shop</title>
+<meta name="generator" content="haiwebcc"/>
+<meta name="robots" content="index,follow"/>
+<meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=1, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<%= stylesheet_link_tag    'sanpham', media: 'all', 'data-turbolinks-track' => true %><%= csrf_meta_tags %><%=  javascript_include_tag  :application  %>
+</head>
+<body id="index" class="index hide-left-column hide-right-column lang_en">
+<div id="page">
+  <div id="toTop" style="display: block;"></div>
+  <div class="main-wrap-center">
+    <div class="main-wrap"> <%= render 'sanpham/header' %>
+      <div class="columns-container">
+        <div id="columns" class="container">
+        	<!-- Breadcrumb -->
+			<div class="breadcrumb clearfix">
+			<a title="Trang chủ" href="<%= root_path%>" class="home"><i class="icon-home"></i></a>
+			<span class="navigation-pipe">&gt;</span>
+			<span class="navigation_page">So sánh sản phẩm</span>
+			</div>
+			<!-- /Breadcrumb -->
+          <div class="row"> 
+          	<% if @products.count > 0%>
+            <!-------data-------->
+            <div class="products_block table-responsive">
+              <table class="table table-bordered" id="product_comparison">
+                <tbody>
+                  
+                  <tr>
+                    <td class="td_empty compare_extra_information" style="width: 150px;">&nbsp;</td>
+                    <% @products.each do |p|%>
+                    <% @product = get_product_info(p.product_id)%>
+                    <td class="ajax_block_product comparison_infos product-block"><div class="remove"> <a onclick="remove_compare(<%= p.id%>);" title="Xóa"> <i class="icon-trash"></i> </a> </div>
+                      <div class="product-image-block"> <a title="<%= @product.name%>" href="<%= sanpham_path%>/detail/<%= @product.id%>" class="product_image"> <img alt="<%= @product.name%>" src="<%= @product.image%>" class="img-responsive"> </a> </div>
+                      <!-- end product-image-block -->
+                      
+                      <h5> <a title="<%= @product.name%>" href="<%= sanpham_path%>/detail/<%= @product.id%>" class="product-name"><%= @product.name%></a> </h5>
+                      
+                      <div class="prices-container">
+                      	<% if @product.discount?%>
+                      	<span class="price product-price"><%= number_to_currency(@product.price*((100-@product.discount))/100)%></span>
+						<span class="old-price product-price"><%= number_to_currency(@product.price)%></span>
+						<span class="price-percent-reduction">- <%= @product.discount%> %</span>
+						<%else%>
+						<span class="price product-price"><%= number_to_currency(@product.price)%></span>
+						<%end%>
+					  </div>
+                      <!-- end prices-container -->
+                      
+                      <div class="product_desc"><%= @product.description.to_s.split(" ").first(20).join(" ")%>...</div>
+                      <div class="comparison_product_infos">
+                        <p class="comparison_availability_statut"> </p>
+                        <div class="clearfix">
+                          <div class="button-container"> 
+                          	<a onclick="add_to_cart(<%= @product.id%>)" title="Thêm vào giỏ hàng" class="button ajax_add_to_cart_button btn btn-default"> <span>Thêm vào giỏ hàng</span> </a> 
+                          	<a title="Xem chi tiết" href="<%= sanpham_path%>/detail/<%= @product.id%>" class="button lnk_view btn btn-default"> <span>Xem chi tiết</span> </a> 
+                          	</div>
+                        </div>
+                      </div>
+                      <!-- end comparison_product_infos -->
+                      </td>
+                   <%end%>
+                  </tr>
+                  <tr class="comparison_header">
+                    <td class="feature-name td_empty"><span>Chức năng</span></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <%@attr.each do |at|%>
+                  <tr>
+                    <td class="comparison_feature_odd feature-name"><strong><%= at.name%></strong></td>
+                    <% @products.each do |pa|%>
+                    <td align="center" class="comparison_feature_odd comparison_infos ajax_block_product">
+                    	<%= get_attribute_product(at,pa.product_id)%>
+                    </td>
+                    <%end%>
+                  </tr>
+                  <%end%>
+                </tbody>
+              </table>
+            </div>
+            <!------//-data------>
+           <%else%>
+           Xin lỗi ! Hiện tại chưa có sản phẩm nào cần so sánh ! 
+           <%end%>  
+          </div>
+        </div>
+      </div>
+      <%= render 'sanpham/footer' %> </div>
+  </div>
+</div>
+<script>
+function add_to_cart(id)
+{
+	$.ajax({url:"/sanpham/"+id+"/add_to_cart",success:function(result){
+	    alert("Thêm vào giỏ hàng thành công !");
+	  }});
+}
+function remove_compare(pid)
+{
+	$.ajax({url:"/mycompare/"+pid+"/remove",success:function(result){
+	    location.reload();
+	  }});
+}
+</script> 
+<script type="text/javascript">
+var CUSTOMIZE_TEXTFIELD = 1;
+var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';
+var FancyboxboxI18nClose = 'Close';
+var contentOnly = '';
+var baseDir = '';
+var baseUri = '';
+var blocksearch_type = 'top';
+
+var homeslider_loop = '1';
+var homeslider_pause = '5000';
+var homeslider_speed = '500';
+var homeslider_width = '1168';
+var  static_token  = '';
+var img_dir = '';
+var quickView = true;
+var roundMode = 2;
+var search_url = '';
+</script> 
+<%= javascript_include_tag 'sanpham', 'data-turbolinks-track' => true %>
+</body>
+</html>

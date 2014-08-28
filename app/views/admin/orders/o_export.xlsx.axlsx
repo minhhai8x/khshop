@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+ 
+wb.add_worksheet(:name => @worksheet) do |sheet|
+    sheet.add_row [@worksheet]
+    @order_report.each { |item| sheet.add_row [item.as_json['mdate'].to_s,item.as_json['num'].to_i] }
+    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D6", :end_at => "P60", :bar_dir => :col, :title => @worksheet) do |chart|
+      chart.add_series :data => sheet["B2:B@order_report.count"], :labels => sheet["A2:A@order_report.count"], :colors => ["00FF00", "FF0000"]
+      chart.valAxis.gridlines = false
+      chart.catAxis.gridlines = false
+    end
+  end

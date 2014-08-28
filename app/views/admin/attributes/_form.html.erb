@@ -1,0 +1,33 @@
+<%= form_for(@admin_attribute) do |f| %>
+  <% if @admin_attribute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_attribute.errors.count, "error") %> prohibited this admin_attribute from being saved:</h2>
+
+      <ul>
+      <% @admin_attribute.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :orderby %><br>
+    <%= f.number_field :orderby %>
+  </div>
+  <div class="field">
+    <%= f.label :product_id %><br>
+    <%= f.number_field :product_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  br_reason: MyString
+  br_userid: 1
+  br_note: MyString
+  br_status: 1
+
+two:
+  br_reason: MyString
+  br_userid: 1
+  br_note: MyString
+  br_status: 1

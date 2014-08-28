@@ -1,0 +1,33 @@
+<%= form_for(@admin_backup_restore) do |f| %>
+  <% if @admin_backup_restore.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_backup_restore.errors.count, "error") %> prohibited this admin_backup_restore from being saved:</h2>
+
+      <ul>
+      <% @admin_backup_restore.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :br_reason %><br>
+    <%= f.text_field :br_reason %>
+  </div>
+  <div class="field">
+    <%= f.label :br_userid %><br>
+    <%= f.number_field :br_userid %>
+  </div>
+  <div class="field">
+    <%= f.label :br_note %><br>
+    <%= f.text_field :br_note %>
+  </div>
+  <div class="field">
+    <%= f.label :br_status %><br>
+    <%= f.number_field :br_status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

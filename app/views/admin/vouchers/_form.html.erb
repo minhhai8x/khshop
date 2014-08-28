@@ -1,0 +1,49 @@
+<%= form_for(@admin_voucher) do |f| %>
+  <% if @admin_voucher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_voucher.errors.count, "error") %> prohibited this admin_voucher from being saved:</h2>
+
+      <ul>
+      <% @admin_voucher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :v_code %><br>
+    <%= f.text_field :v_code %>
+  </div>
+  <div class="field">
+    <%= f.label :from_name %><br>
+    <%= f.text_field :from_name %>
+  </div>
+  <div class="field">
+    <%= f.label :from_email %><br>
+    <%= f.text_field :from_email %>
+  </div>
+  <div class="field">
+    <%= f.label :to_name %><br>
+    <%= f.text_field :to_name %>
+  </div>
+  <div class="field">
+    <%= f.label :to_email %><br>
+    <%= f.text_field :to_email %>
+  </div>
+  <div class="field">
+    <%= f.label :v_messsage %><br>
+    <%= f.text_field :v_messsage %>
+  </div>
+  <div class="field">
+    <%= f.label :v_amount %><br>
+    <%= f.text_field :v_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :v_status %><br>
+    <%= f.number_field :v_status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

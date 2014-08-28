@@ -1,0 +1,14 @@
+<div id="htmlcontent_top">
+    <ul class="htmlcontent-home clearfix row">
+    <% @banners_s.each.with_index do |bns,index| %>
+      <li class="htmlcontent-item-<%= index+1%> col-xs-4"> <a href="<%= bns.lg_link%>" class="item-link" title="<%= bns.lg_title%>"> <img src="<%= bns.lg_imageurl%>" class="item-img" alt="<%= bns.lg_title%>" width="368" height="192"/>
+        <div class="item-html">
+          <h2><%= bns.lg_title%></h2>
+          <p><%= bns.lg_description.to_s.split(" ").first(5).join(" ")%></p>
+          <span><%= bns.lg_btntitle%></span> 
+        </div>
+        </a> 
+      </li>
+    <%end%> 
+    </ul>
+  </div>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bn speed:</strong>
+  <%= @admin_banner_config.bn_speed %>
+</p>
+
+<p>
+  <strong>Bn pause:</strong>
+  <%= @admin_banner_config.bn_pause %>
+</p>
+
+<p>
+  <strong>Bn width:</strong>
+  <%= @admin_banner_config.bn_width %>
+</p>
+
+<p>
+  <strong>Bn random:</strong>
+  <%= @admin_banner_config.bn_random %>
+</p>
+
+<p>
+  <strong>Bn max large:</strong>
+  <%= @admin_banner_config.bn_max_large %>
+</p>
+
+<p>
+  <strong>Bn max small:</strong>
+  <%= @admin_banner_config.bn_max_small %>
+</p>
+
+<%= link_to 'Edit', edit_admin_banner_config_path(@admin_banner_config) %> |
+<%= link_to 'Back', admin_banner_configs_path %>

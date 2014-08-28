@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pr_name: MyString
+  pr_type: MyString
+  pr_value: MyString
+  pr_status: 1
+
+two:
+  pr_name: MyString
+  pr_type: MyString
+  pr_value: MyString
+  pr_status: 1

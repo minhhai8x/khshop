@@ -1,0 +1,47 @@
+<div id="right"> 
+    <!-- table -->
+    <div class="box"> 
+      <!-- box / title -->
+      <div class="title">
+        <h5>Danh sách banner</h5>
+      </div>
+      <!-- end box / title -->
+      <div class="table">
+      	<div class="action">
+		<div class="button">
+			<%= link_to "Thêm banner",new_admin_banner_path,:class=>"ui-button ui-widget ui-state ui-corner-all"%>
+		</div>
+	  </div>
+	  <br clear="all" /><br clear="all" />
+        <form action="" method="post">
+          <table>
+            <thead>
+              <tr>
+              	<th class="selected">STT</th>
+              	<th>Hình ảnh</th>
+                <th>Loại banner</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @admin_banners.each.with_index  do |bn,index| %>	
+              <tr>
+              	<td class="selected"><%=index+1%></td>
+                <td class="date"><img width="200" src="<%= bn.lg_imageurl%>" /></td>
+                <td class="price"><% if bn.lg_type==0 %>Banner lớn<%else%>Banner nhỏ<%end%></td>
+                <td class="category">
+                <div class="btncontrol">
+                	<%= link_to image_tag(asset_path('admin/pencil.png')), edit_admin_banner_path(bn), :title=>"Sửa"%>
+                    <div style="width:10px;"></div>
+                    <%= link_to image_tag(asset_path('admin/remove.png')), bn, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa ?' }, :title=>"Xóa" %>
+                </div>
+                </td>
+              </tr>
+             <%end%> 
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <!-- end table --> 
+</div>
