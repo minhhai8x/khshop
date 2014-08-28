@@ -10,4 +10,4 @@ Admin::User.create(:email => 'admin@gmail.com', :password => '@12345678', :passw
 Admin::Store.create(:s_name => 'Cua hang xyz', :s_description => 'Mo ta cua hang xyz')
 Admin::Systemconfig.create(:currency => '0', :rate => '21000', :paypal_account => 'banhg@gmail.com')
 Admin::Mymailer.create(:e_title=>"CSKH_KHShop", :e_address=>"smtp.sendgrid.net", :e_port=>"587", :e_domain=>"heroku.com", :e_username=>"app28151738@heroku.com", :e_password=>"rhzzt2do")
-BannerConfigs.create(:bn_speed=>"500",:bn_pause=>"5000",:bn_width=>"1168",:bn_random=>"0",:bn_max_large=>"3",:bn_max_small=>"6")
+Admin::BannerConfigs.create(:bn_speed=>"500",:bn_pause=>"5000",:bn_width=>"1168",:bn_random=>"0",:bn_max_large=>"3",:bn_max_small=>"6")
