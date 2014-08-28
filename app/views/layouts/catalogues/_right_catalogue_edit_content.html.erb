@@ -46,7 +46,12 @@
 <div class="field">
   <div class="label"><label for="select">Thể loại cha:</label></div>
   <div class="select">
-  	<%= f.select :parentid,@cat.collect{ |c| [c.name, c.id]},{:include_blank  => '--- Chọn thể loại ---' },:class=>"styledselect_form_1"%>
+  	<select class="styledselect_form_1" id="admin_catalogue_parentid" name="admin_catalogue[parentid]">
+		<option value="0">--- Chọn thể loại ---</option>
+		<% @cat.each do |c|%>
+		<option value="<%= c.id%>"><%= c.name></option>
+		<%end%>
+	</select>
   </div>
 </div>
 
