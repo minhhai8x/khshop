@@ -82,9 +82,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
   #config.action_controller.asset_host = "http://localhost:3000"
-  config.action_controller.asset_host = "http://khshop.herokuapp.com"
+  config.action_controller.asset_host = "http://thegioididong.herokuapp.com"
   #config for action mailer
-  config.action_mailer.default_url_options = { :host => 'khshop.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'http://thegioididong.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
